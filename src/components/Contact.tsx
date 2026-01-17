@@ -240,11 +240,12 @@ const Contact = () => {
                   <label htmlFor="service" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
                     Service <span className={isDark ? 'text-[#B83D0C]' : 'text-white'}>*</span>
                   </label>
+                  <div className="relative">
                   <select
                     id="service"
                     name="service"
                     required
-                    className={`w-full px-4 py-3.5 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#8A847D]'}`}
+                    className={`w-full pl-4 pr-12 py-3.5 rounded-xl text-base focus:outline-none transition-all appearance-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#8A847D]'}`}
                   >
                     <option value="">Select a service</option>
                     <option value="sample">Sample Making</option>
@@ -254,6 +255,15 @@ const Contact = () => {
                     <option value="installations">Hardware Installations</option>
                     <option value="consultation">Consultation</option>
                   </select>
+                  <svg
+                    className={`absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none w-4 h-4 ${isDark ? 'text-white/40' : 'text-[#8A847D]'}`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                  </div>
                 </div>
 
                 <div>
