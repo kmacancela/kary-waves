@@ -58,7 +58,7 @@ const Contact = () => {
       isDark ? 'bg-[--color-espresso-light]' : 'bg-[--color-cream-dark]'
     }`}>
       {/* Header */}
-      <div className={`section border-b ${isDark ? 'border-[--color-cream]/10' : 'border-[--color-espresso]/10'}`}>
+      <div className="section relative">
         <div className="container mx-auto px-6 md:px-8">
           <div className={`reveal ${isVisible ? 'visible' : ''} max-w-3xl`}>
             <div className="flex items-center gap-3 mb-6">
@@ -73,6 +73,41 @@ const Contact = () => {
               our family team is here to help bring your vision to life.
             </p>
           </div>
+        </div>
+        {/* Decorative wavy line divider */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
+          <svg
+            viewBox="0 0 1440 60"
+            preserveAspectRatio="none"
+            className="w-full h-12 md:h-16"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d={`M0,30
+                  C60,30 80,30 120,30
+                  C160,30 180,30 220,30
+                  C260,30 280,10 300,10
+                  C320,10 325,30 310,45
+                  C295,60 280,45 290,30
+                  C300,15 320,30 360,30
+                  C440,30 520,30 580,30
+                  C620,30 680,50 700,50
+                  C720,50 730,30 720,15
+                  C710,0 690,15 700,30
+                  C710,45 740,30 780,30
+                  C860,30 940,30 1020,30
+                  C1060,30 1100,10 1120,10
+                  C1140,10 1150,30 1140,45
+                  C1130,60 1110,45 1115,30
+                  C1120,15 1145,30 1180,30
+                  C1260,30 1340,30 1440,30`}
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              className={isDark ? 'text-[--color-cream]/20' : 'text-[--color-espresso]/15'}
+            />
+          </svg>
         </div>
       </div>
 

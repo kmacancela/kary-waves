@@ -107,7 +107,7 @@ const Lookbook = () => {
                 Our <em className="italic text-[--color-terracotta]">Lookbook</em>
               </h2>
               <p className={`text-base md:text-lg max-w-md ${isDark ? 'text-[--color-stone]' : 'text-[--color-cream]/80'}`}>
-                A curated collection of garments crafted by father and daughter, together.
+                A curated collection of garments crafted by Kary Waves.
               </p>
             </div>
 

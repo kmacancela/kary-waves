@@ -60,6 +60,7 @@ const Footer = () => {
                 { href: '#services', label: 'Services' },
                 // { href: '#installations', label: 'Installations' },
                 { href: '#lookbook', label: 'Lookbook' },
+                { href: '#faq', label: 'FAQ' },
                 { href: '#contact', label: 'Contact' },
               ].map((link) => (
                 <li key={link.href}>
@@ -83,9 +84,16 @@ const Footer = () => {
             {/* <h4 className="text-sm uppercase tracking-widest text-[--color-terracotta] mb-5 font-semibold">Contact</h4> */}
             <ul className={`space-y-3 text-base ${isDark ? 'text-[--color-cream]/80' : 'text-[--color-espresso]/70'}`}>
               <li>
-                265 W 37th St, #650
-                <br />
-                New York, NY 10018
+                <a
+                  href="https://maps.app.goo.gl/xjYkXNeMAz9V9d339"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`transition-colors ${isDark ? 'hover:text-[--color-cream]' : 'hover:text-[--color-espresso]'}`}
+                >
+                  265 W 37th St, #650
+                  <br />
+                  New York, NY 10018
+                </a>
               </li>
               <li>
                 <a href="tel:+16466751500" className={`transition-colors ${isDark ? 'hover:text-[--color-cream]' : 'hover:text-[--color-espresso]'}`}>

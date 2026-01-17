@@ -132,7 +132,7 @@ const FAQ = () => {
     <section
       id="faq"
       ref={sectionRef}
-      className={`section-lg transition-colors duration-300 ${
+      className={`section-lg !pb-12 md:!pb-16 transition-colors duration-300 ${
         isDark ? 'bg-[--color-espresso]' : 'bg-[--color-cream]'
       }`}
     >
