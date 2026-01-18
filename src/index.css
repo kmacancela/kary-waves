@@ -32,6 +32,33 @@
 
 }
 
+/* Mobile menu push effect */
+body.mobile-menu-open {
+  overflow: hidden;
+}
+
+#root {
+  position: relative;
+  z-index: 50;
+  background: inherit;
+  transition: transform 0.3s ease-out, border-radius 0.3s ease-out;
+}
+
+body.mobile-menu-open > #root {
+  transform: translateX(-70%);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  box-shadow: -10px 0 40px rgba(0, 0, 0, 0.3);
+}
+
+@media (min-width: 1024px) {
+  body.mobile-menu-open > #root {
+    transform: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
 /* Service cards hover effect */
 .service-card {
   transform: scale(1) translateY(0);
