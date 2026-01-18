@@ -6,7 +6,7 @@ const Hero = () => {
         <img
           src="/images/hero-background.jpg"
           alt="Fashion atelier workspace with fabric and sewing materials"
-          className="w-full h-full object-cover scale-x-[-1]"
+          className="w-full h-full object-cover object-[30%_center] sm:object-center scale-x-[-1]"
           fetchPriority="high"
         />
         {/* Stronger overlay for text readability */}
@@ -20,15 +20,15 @@ const Hero = () => {
           <div className="max-w-3xl">
             {/* Heritage Badge */}
             <div className="flex items-center gap-4 mb-8 animate-fade-up">
-              <span className="heritage-badge">
-                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+              <span className="heritage-badge max-w-[250px] sm:max-w-none text-[0.5625rem] sm:text-[0.8125rem] px-2 py-1 sm:px-4 sm:py-2 gap-1 sm:gap-2 tracking-[0.03em] sm:tracking-[0.1em] leading-tight sm:leading-normal">
+                <svg className="w-2.5 h-2.5 sm:w-4 sm:h-4 shrink-0" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                 </svg>
                 Family-Owned Garment Manufacturer
               </span>
             </div>
 
-            <h1 className="display-xl text-white mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]">
+            <h1 className="text-[4.5rem] sm:text-[clamp(2.75rem,8vw,6.5rem)] leading-[0.95] tracking-[-0.03em] font-[Instrument_Serif] text-white mb-8 drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]">
               <span className="block animate-fade-up delay-100">Where</span>
               <span className="block animate-fade-up delay-200">
                 <em className="italic">fashion</em>
@@ -48,24 +48,24 @@ const Hero = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-              <a href="#about" className="text-white text-base uppercase tracking-wider hover:opacity-70 transition-opacity font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+              <a href="#about" className="hidden sm:block text-white text-base uppercase tracking-wider hover:opacity-70 transition-opacity font-semibold drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
                 Our Story
               </a>
             </div>
 
             {/* Stats Row */}
-            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 mt-16 animate-fade-up delay-600">
+            <div className="flex justify-between sm:justify-start sm:gap-12 mt-16 animate-fade-up delay-600">
               <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-[Instrument_Serif] text-white">20+</div>
-                <div className="text-white text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Years Operating</div>
+                <div className="text-white text-xs sm:text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Years Operating</div>
               </div>
               <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-[Instrument_Serif] text-white">500+</div>
-                <div className="text-white text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Brands Served</div>
+                <div className="text-white text-xs sm:text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Brands Served</div>
               </div>
               <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
                 <div className="text-3xl sm:text-4xl md:text-5xl font-[Instrument_Serif] text-white">3</div>
-                <div className="text-white text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Generations</div>
+                <div className="text-white text-xs sm:text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Generations</div>
               </div>
             </div>
           </div>
