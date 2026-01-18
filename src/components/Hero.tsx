@@ -4,9 +4,10 @@ const Hero = () => {
       {/* Background - Dramatic tailor workspace */}
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1497997092403-f091fcf5b6c4?q=80&w=2070&auto=format&fit=crop"
+          src="/images/hero-background.jpg"
           alt="Fashion atelier workspace with fabric and sewing materials"
           className="w-full h-full object-cover scale-x-[-1]"
+          fetchPriority="high"
         />
         {/* Stronger overlay for text readability */}
         <div className="absolute inset-0 bg-[--color-espresso]/80" />
@@ -23,7 +24,6 @@ const Hero = () => {
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" />
                 </svg>
-                {/* Top NYC Family-Owned Business */}
                 Family-Owned Garment Manufacturer
               </span>
             </div>
@@ -54,18 +54,18 @@ const Hero = () => {
             </div>
 
             {/* Stats Row */}
-            <div className="flex gap-12 mt-16 animate-fade-up delay-600">
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 mt-16 animate-fade-up delay-600">
               <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
-                <div className="text-4xl md:text-5xl font-[Instrument_Serif] text-white">20+</div>
-                <div className="text-white text-sm uppercase tracking-wider mt-2 font-semibold">Years Operating</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-[Instrument_Serif] text-white">20+</div>
+                <div className="text-white text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Years Operating</div>
               </div>
               <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
-                <div className="text-4xl md:text-5xl font-[Instrument_Serif] text-white">500+</div>
-                <div className="text-white text-sm uppercase tracking-wider mt-2 font-semibold">Brands Served</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-[Instrument_Serif] text-white">500+</div>
+                <div className="text-white text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Brands Served</div>
               </div>
               <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.4)]">
-                <div className="text-4xl md:text-5xl font-[Instrument_Serif] text-white">3</div>
-                <div className="text-white text-sm uppercase tracking-wider mt-2 font-semibold">Generations</div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-[Instrument_Serif] text-white">3</div>
+                <div className="text-white text-sm uppercase tracking-wider mt-1 sm:mt-2 font-semibold">Generations</div>
               </div>
             </div>
           </div>

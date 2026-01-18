@@ -35,6 +35,9 @@
 /* Mobile menu push effect */
 body.mobile-menu-open {
   overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 
 #root {
@@ -585,4 +588,54 @@ input:focus, textarea:focus, select:focus {
 .dark .theme-toggle::after {
   transform: translateX(20px);
   background-color: var(--color-cream);
+}
+
+/* Reduced motion - respect user accessibility preferences */
+@media (prefers-reduced-motion: reduce) {
+  /* Disable all animations */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Keep scroll behavior but make it instant */
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Disable marquee scrolling */
+  .marquee {
+    animation: none;
+  }
+
+  /* Make reveal elements visible immediately */
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Disable stagger delays */
+  .delay-100,
+  .delay-200,
+  .delay-300,
+  .delay-400,
+  .delay-500,
+  .delay-600 {
+    opacity: 1;
+    animation: none;
+  }
+
+  /* Disable service card hover transforms */
+  .services-grid:hover .service-card,
+  .services-grid .service-card:hover {
+    transform: none;
+  }
+
+  /* Disable image hover zoom */
+  .img-hover:hover img {
+    transform: none;
+  }
 }

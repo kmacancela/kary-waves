@@ -30,14 +30,24 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Toggle body class for mobile menu push effect
+  // Toggle body class for mobile menu push effect with iOS scroll lock
   useEffect(() => {
     if (isMobileMenuOpen) {
+      const scrollY = window.scrollY
       document.body.classList.add('mobile-menu-open')
+      document.body.style.top = `-${scrollY}px`
     } else {
+      const scrollY = document.body.style.top
       document.body.classList.remove('mobile-menu-open')
+      document.body.style.top = ''
+      if (scrollY) {
+        window.scrollTo(0, parseInt(scrollY || '0') * -1)
+      }
     }
-    return () => document.body.classList.remove('mobile-menu-open')
+    return () => {
+      document.body.classList.remove('mobile-menu-open')
+      document.body.style.top = ''
+    }
   }, [isMobileMenuOpen])
 
   const navLinks = [
@@ -140,7 +150,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 -mr-2"
+            className="lg:hidden p-3 -mr-3"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -176,7 +186,7 @@ const Header = () => {
             aria-label="Close menu"
           />
           {/* Menu panel */}
-          <nav className={`absolute right-0 top-0 bottom-0 w-[70%] px-8 pt-20 flex flex-col gap-6 transition-transform duration-300 ease-out ${
+          <nav className={`absolute right-0 top-0 bottom-0 w-[85%] sm:w-[70%] px-6 sm:px-8 pt-20 flex flex-col gap-5 sm:gap-6 transition-transform duration-300 ease-out ${
             isDark ? 'bg-[#0D0B0A]' : 'bg-[#E8E4DF]'
           } ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
             {navLinks.map((link) => (

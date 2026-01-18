@@ -208,7 +208,7 @@ const FAQ = () => {
               {canScrollUp && (
                 <button
                   onClick={scrollUp}
-                  className={`absolute -top-2 left-1/2 -translate-x-1/2 z-10 p-2 transition-all duration-200 ${
+                  className={`absolute -top-2 left-1/2 -translate-x-1/2 z-10 p-3 transition-all duration-200 ${
                     isDark
                       ? 'text-[--color-cream]/80 hover:text-[--color-cream]'
                       : 'text-[--color-stone] hover:text-[--color-espresso]'
@@ -273,7 +273,7 @@ const FAQ = () => {
                 <div className="flex flex-col items-center mt-2">
                   <button
                     onClick={scrollDown}
-                    className={`p-2 transition-all duration-200 ${
+                    className={`p-3 transition-all duration-200 ${
                       isDark
                         ? 'text-[--color-cream]/80 hover:text-[--color-cream]'
                         : 'text-[--color-stone] hover:text-[--color-espresso]'

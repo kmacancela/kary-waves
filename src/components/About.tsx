@@ -55,14 +55,14 @@ const About = () => {
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-14 items-stretch">
           {/* Video with family story overlay */}
           <div className="reveal relative">
-            <div className="relative overflow-hidden rounded-lg h-full min-h-[400px]">
+            <div className="relative overflow-hidden rounded-lg h-full min-h-[280px] sm:min-h-[350px] lg:min-h-[400px]">
               <video
                 src="/videos/about.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover scale-[1.15]"
+                className="w-full h-full object-cover scale-105 sm:scale-110 lg:scale-[1.15]"
               />
             </div>
           </div>

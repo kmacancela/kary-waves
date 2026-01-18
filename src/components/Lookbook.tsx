@@ -64,6 +64,8 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 const Lookbook = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
+  const touchStartX = useRef<number>(0)
+  const touchStartY = useRef<number>(0)
   const { isDark } = useTheme()
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null)
 
@@ -77,6 +79,29 @@ const Lookbook = () => {
         left: direction === 'left' ? -scrollAmount : scrollAmount,
         behavior: 'smooth',
       })
+    }
+  }
+
+  // Touch handlers for swipe gestures
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].clientX
+    const touchEndY = e.changedTouches[0].clientY
+    const deltaX = touchStartX.current - touchEndX
+    const deltaY = Math.abs(touchStartY.current - touchEndY)
+
+    // Only trigger if horizontal swipe is more significant than vertical
+    // and exceeds threshold (50px)
+    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > deltaY) {
+      if (deltaX > 0) {
+        scroll('right')
+      } else {
+        scroll('left')
+      }
     }
   }
 
@@ -133,7 +158,7 @@ const Lookbook = () => {
           {/* Left Arrow */}
           <button
             onClick={() => scroll('left')}
-            className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
+            className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
               isDark
                 ? 'bg-[--color-espresso]/80 text-[--color-cream] hover:bg-[--color-espresso]'
                 : 'bg-[--color-cream]/80 text-[--color-espresso] hover:bg-[--color-cream]'
@@ -148,7 +173,7 @@ const Lookbook = () => {
           {/* Right Arrow */}
           <button
             onClick={() => scroll('right')}
-            className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
+            className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
               isDark
                 ? 'bg-[--color-espresso]/80 text-[--color-cream] hover:bg-[--color-espresso]'
                 : 'bg-[--color-cream]/80 text-[--color-espresso] hover:bg-[--color-cream]'
@@ -164,18 +189,21 @@ const Lookbook = () => {
           <div
             ref={scrollRef}
             className="horizontal-scroll gap-5 scroll-smooth"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             {images.map((image, index) => (
               <div
                 key={index}
                 onClick={() => openModal(image)}
                 onContextMenu={(e) => e.preventDefault()}
-                className="w-[300px] md:w-[380px] lg:w-[420px] aspect-[3/4] relative cursor-pointer group flex-shrink-0 select-none"
+                className="w-[85vw] sm:w-[300px] md:w-[380px] lg:w-[420px] max-w-[300px] sm:max-w-none aspect-[3/4] relative cursor-pointer group flex-shrink-0 select-none"
               >
                 <img
                   src={image.src}
                   alt={image.alt}
                   draggable={false}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-opacity duration-300 group-hover:opacity-90 pointer-events-none"
                 />
                 {/* Protective overlay - prevents direct image interaction */}

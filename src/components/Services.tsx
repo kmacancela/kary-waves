@@ -104,7 +104,7 @@ const Services = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="service-card reveal px-8 py-14 rounded-2xl border transition-all duration-300 ease-out cursor-default shadow-sm hover:shadow-xl"
+                className="service-card reveal px-6 py-10 sm:px-8 sm:py-12 md:py-14 rounded-2xl border transition-all duration-300 ease-out cursor-default shadow-sm hover:shadow-xl"
                 style={styles.card}
               >
                 <h3

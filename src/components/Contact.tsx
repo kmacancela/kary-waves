@@ -204,7 +204,7 @@ const Contact = () => {
                     id="name"
                     name="name"
                     required
-                    className={`w-full px-4 py-3.5 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
+                    className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
                     placeholder="Your name"
                   />
                 </div>
@@ -218,7 +218,7 @@ const Contact = () => {
                     id="email"
                     name="email"
                     required
-                    className={`w-full px-4 py-3.5 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
+                    className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
                     placeholder="Your email address"
                   />
                 </div>
@@ -231,7 +231,7 @@ const Contact = () => {
                     type="tel"
                     id="phone"
                     name="phone"
-                    className={`w-full px-4 py-3.5 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
+                    className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
                     placeholder="Your phone number"
                   />
                 </div>
@@ -245,7 +245,7 @@ const Contact = () => {
                     id="service"
                     name="service"
                     required
-                    className={`w-full pl-4 pr-12 py-3.5 rounded-xl text-base focus:outline-none transition-all appearance-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#8A847D]'}`}
+                    className={`w-full pl-4 pr-12 py-4 rounded-xl text-base focus:outline-none transition-all appearance-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#8A847D]'}`}
                   >
                     <option value="">Select a service</option>
                     <option value="sample">Sample Making</option>
@@ -275,7 +275,7 @@ const Contact = () => {
                     name="message"
                     rows={4}
                     required
-                    className={`w-full px-4 py-3.5 rounded-xl text-base focus:outline-none transition-all resize-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
+                    className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all resize-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
                     placeholder="Tell us about your project..."
                   />
                 </div>

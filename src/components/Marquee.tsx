@@ -38,9 +38,9 @@ const Marquee = () => {
 
   const renderItems = () =>
     shuffledItems.map((item, i) => (
-      <span key={i} className="inline-flex items-center whitespace-nowrap px-10">
-        <span className="text-[--color-terracotta] text-base mr-4">{item.icon}</span>
-        <span className={`text-base uppercase tracking-[0.15em] font-medium ${
+      <span key={i} className="inline-flex items-center whitespace-nowrap px-6 sm:px-10">
+        <span className="text-[--color-terracotta] text-sm sm:text-base mr-3 sm:mr-4">{item.icon}</span>
+        <span className={`text-sm sm:text-base uppercase tracking-[0.1em] sm:tracking-[0.15em] font-medium ${
           isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'
         }`}>
           {item.text}
@@ -49,7 +49,7 @@ const Marquee = () => {
     ))
 
   return (
-    <div className={`border-y py-6 overflow-hidden transition-colors duration-300 ${
+    <div className={`border-y py-4 sm:py-6 overflow-hidden transition-colors duration-300 ${
       isDark
         ? 'bg-[#13110F] border-[--color-cream]/10'
         : 'bg-[#E8E4DE] border-[--color-espresso]/10'
