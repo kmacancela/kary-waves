@@ -13,6 +13,8 @@ const texts = [
   'Snaps',
   'Eyelets',
   'Tech Pack',
+  'Grading',
+  'Digitizing',
 ]
 
 const icons = ['◆', '✦']

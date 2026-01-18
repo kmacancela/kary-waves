@@ -79,7 +79,7 @@ const Services = () => {
     <section
       id="services"
       ref={sectionRef}
-      className={`transition-colors duration-300 ${
+      className={`scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
         hasLightBackground ? 'bg-[--color-cream]' : 'bg-[--color-espresso]'
       }`}
     >

@@ -132,7 +132,7 @@ const FAQ = () => {
     <section
       id="faq"
       ref={sectionRef}
-      className={`section-lg !pb-12 md:!pb-16 transition-colors duration-300 ${
+      className={`section-lg !pb-12 md:!pb-16 scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
         isDark ? 'bg-[--color-espresso]' : 'bg-[--color-cream]'
       }`}
     >

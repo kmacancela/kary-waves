@@ -32,7 +32,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className={`section-lg transition-colors duration-300 ${
+      className={`section-lg transition-colors duration-300 scroll-mt-20 md:scroll-mt-24 ${
         isDark ? 'bg-[--color-espresso]' : 'bg-[--color-cream]'
       }`}
     >
@@ -45,7 +45,7 @@ const About = () => {
             <div className="w-12 h-px bg-[--color-gold]" />
           </div> */}
           <h2 className={`display-lg mb-4 ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}>
-            Three generations. <em className="italic text-[--color-terracotta]">One vision.</em>
+            Three generations.<br className="md:hidden" /> <em className="italic text-[--color-terracotta]">One vision.</em>
           </h2>
           {/* <p className={`text-lg md:text-xl max-w-2xl mx-auto ${isDark ? 'text-[--color-cream]/90' : 'text-[--color-espresso]/90'}`}>
             Where a father's decades of mastery meets a daughter's fresh creative vision.
@@ -54,15 +54,15 @@ const About = () => {
 
         <div className="grid lg:grid-cols-2 gap-6 lg:gap-14 items-stretch">
           {/* Video with family story overlay */}
-          <div className="reveal relative">
-            <div className="relative overflow-hidden rounded-lg h-full min-h-[280px] sm:min-h-[350px] lg:min-h-[400px]">
+          <div className="reveal">
+            <div className="relative overflow-hidden rounded-none md:rounded-lg aspect-[4/3] md:aspect-auto md:min-h-[350px] lg:min-h-[400px] -mx-12 w-[calc(100%+6rem)] md:mx-0 md:w-full">
               <video
                 src="/videos/about.mp4"
                 autoPlay
                 loop
                 muted
                 playsInline
-                className="w-full h-full object-cover scale-105 sm:scale-110 lg:scale-[1.15]"
+                className="absolute inset-0 w-full h-full object-cover scale-110 sm:scale-110 lg:scale-[1.15]"
               />
             </div>
           </div>
@@ -82,13 +82,14 @@ const About = () => {
 
             <div className="reveal space-y-5 mb-8">
               <p className={`text-base md:text-lg leading-relaxed ${isDark ? 'text-[--color-cream]/90' : 'text-[--color-stone]'}`}>
-                From your initial concept to the finished piece, we handle every step of production with precision and care. Our services span <span className="font-semibold">pattern development</span>, <span className="font-semibold">sample making</span>, and <span className="font-semibold">full-scale manufacturing</span>—plus specialized hardware installations including snaps, rivets, eyelets, and more.
+                From your initial concept to the finished piece, we handle every step of production with precision and care. Our services include <span className="font-semibold">pattern development</span>, <span 
+                className="font-semibold">sample making</span>, <span className="font-semibold">garment manufacturing</span>, and <span className="font-semibold">custom alterations</span>—plus specialized hardware installations including snaps, rivets, eyelets, and more.
               </p>
               <p className={`text-base md:text-lg leading-relaxed ${isDark ? 'text-[--color-cream]/90' : 'text-[--color-stone]'}`}>
-                With over <span className="text-[--color-terracotta] font-semibold">20 years of expertise</span>, we've partnered with hundreds of brands—from emerging designers launching their first collection to established labels scaling their production. Each collaboration is unique, and we adapt to your specific vision and requirements.
+                With <span className="text-[--color-terracotta] font-semibold">three generations of expertise</span>, we've partnered with hundreds of brands—from emerging designers launching their first collection to established labels scaling their production. Each collaboration is unique, and we adapt to your specific vision and requirements.
               </p>
               <p className={`text-base md:text-lg leading-relaxed ${isDark ? 'text-[--color-cream]/90' : 'text-[--color-stone]'}`}>
-                Our promise is simple: a <span className="font-semibold">personal, hassle-free experience</span> that lets you focus on your creative vision while we bring it to life with craftsmanship you can trust.
+                Our promise is simple: a <span className="font-semibold">personal, hassle-free experience</span> that lets you focus on your creative vision while we bring it to life with generational craftsmanship you can trust.
               </p>
             </div>
 

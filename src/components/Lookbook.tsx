@@ -117,7 +117,7 @@ const Lookbook = () => {
 
   return (
     <>
-      <section id="lookbook" className={`section-lg overflow-hidden transition-colors duration-300 ${
+      <section id="lookbook" className={`section-lg overflow-hidden scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
         isDark ? 'bg-[--color-cream-dark]' : 'bg-[--color-espresso]'
       }`}>
         <div className="container mx-auto px-6 md:px-8">

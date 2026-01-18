@@ -54,7 +54,7 @@ const Contact = () => {
   }, [])
 
   return (
-    <section id="contact" ref={sectionRef} className={`transition-colors duration-300 ${
+    <section id="contact" ref={sectionRef} className={`scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
       isDark ? 'bg-[--color-espresso-light]' : 'bg-[--color-cream-dark]'
     }`}>
       {/* Header */}
