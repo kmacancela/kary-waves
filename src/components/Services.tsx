@@ -87,10 +87,6 @@ const Services = () => {
         <div className="container mx-auto px-6 md:px-8">
           {/* Header */}
           <div className="reveal max-w-2xl mb-12">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="line-accent" />
-              <span className="eyebrow">Our Craft</span>
-            </div>
             <h2 className={`display-lg mb-4 ${hasLightBackground ? 'text-[--color-espresso]' : 'text-[--color-cream]'}`}>
               From concept <em className="italic text-[--color-terracotta]">to creation.</em>
             </h2>

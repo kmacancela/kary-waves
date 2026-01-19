@@ -124,10 +124,10 @@ const Lookbook = () => {
           {/* Header */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
             <div>
-              <div className="flex items-center gap-3 mb-6">
+              {/* <div className="flex items-center gap-3 mb-6">
                 <div className="line-accent" />
                 <span className="eyebrow">Portfolio</span>
-              </div>
+              </div> */}
               <h2 className={`display-md mb-3 ${isDark ? 'text-[--color-espresso]' : 'text-[--color-cream]'}`}>
                 Our <em className="italic text-[--color-terracotta]">Lookbook</em>
               </h2>

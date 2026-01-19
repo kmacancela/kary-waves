@@ -186,15 +186,48 @@ const Header = () => {
             aria-label="Close menu"
           />
           {/* Menu panel */}
-          <nav className={`absolute right-0 top-0 bottom-0 w-[85%] sm:w-[70%] px-6 sm:px-8 pt-20 flex flex-col gap-5 sm:gap-6 transition-transform duration-300 ease-out ${
+          <nav className={`absolute right-0 top-0 bottom-0 w-[85%] sm:w-[70%] px-6 sm:px-8 pt-28 flex flex-col gap-5 sm:gap-6 transition-transform duration-300 ease-out ${
             isDark ? 'bg-[#0D0B0A]' : 'bg-[#E8E4DF]'
           } ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
+            {/* Top right buttons */}
+            <div className="absolute top-5 right-6 flex items-center gap-3">
+              {/* Theme toggle */}
+              <button
+                onClick={toggle}
+                className={`w-10 h-10 flex items-center justify-center transition-opacity hover:opacity-70 ${
+                  isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'
+                }`}
+                aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              >
+                {isDark ? (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                  </svg>
+                )}
+              </button>
+              {/* Close button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className={`w-10 h-10 flex items-center justify-center border-[0.5px] transition-opacity hover:opacity-70 ${
+                  isDark ? 'border-[--color-cream]/30 text-[--color-cream]' : 'border-[--color-espresso]/30 text-[--color-espresso]'
+                }`}
+                aria-label="Close menu"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`text-2xl font-[Instrument_Serif] transition-opacity hover:opacity-70 ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}
+                className={`text-2xl font-[Outfit] font-light tracking-wide transition-opacity hover:opacity-70 ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}
               >
                 {link.label}
               </a>
