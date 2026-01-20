@@ -5,26 +5,32 @@ const services = [
   {
     title: 'Consultation',
     description: 'One-on-one guidance to bring your vision to life. We sit down with you to understand your brand, refine your concept, select the right materials, and map out a realistic production timeline. Whether you\'re launching your first collection or scaling an established line, we\'ll help you navigate every decision.',
+    backgroundImage: '/images/consultation.png',
   },
   {
     title: 'Pattern Development',
     description: 'Expert pattern making for the perfect fit. Our skilled pattern makers translate your designs into precise, production-ready patterns that scale flawlessly across sizes. We account for fabric behavior, construction methods, and fit adjustments to ensure consistency from sample to final garment.',
+    backgroundImage: '/images/pattern-making.png',
   },
   {
     title: 'Sample Making',
     description: 'Transform sketches into tangible prototypes. Our sample room brings your designs to life with meticulous attention to detail. We work through multiple iterations if needed, refining fit, construction, and finishing until your sample is exactly right and ready for production approval.',
+    backgroundImage: '/images/sample-making.png',
   },
   {
     title: 'Production',
     description: 'From small batch to full scale, we handle it all. Low minimums make us ideal for emerging labels, while our capacity supports larger runs for established brands. Every piece receives the same precision, quality control, and transparent communication—regardless of volume.',
+    backgroundImage: '/images/production-process.png',
   },
   {
     title: 'Alterations',
     description: 'Precision alterations to perfect the fit. From minor adjustments like hemming and taking in seams to complete garment reworks, our experienced tailors handle it all. We work with individuals, designers, and brands who need expert alterations done right.',
+    backgroundImage: '/images/alteration.png',
   },
   {
     title: 'Hardware Installation',
     description: 'Professional installation of eyelets, rivets, grommets, and snaps. We use industrial-grade equipment to ensure secure, clean, and consistent placement on any garment or accessory. Bring your pieces to us or include hardware installation as part of your production run.',
+    backgroundImage: '/images/rivet-machine.png',
   },
 ]
 
@@ -100,21 +106,36 @@ const Services = () => {
             {services.map((service, index) => (
               <div
                 key={index}
-                className="service-card reveal px-6 py-10 sm:px-8 sm:py-12 md:py-14 rounded-2xl border transition-all duration-300 ease-out cursor-default shadow-sm hover:shadow-xl"
+                className="service-card reveal relative overflow-hidden px-6 py-10 sm:px-8 sm:py-12 md:py-14 rounded-2xl border transition-all duration-300 ease-out cursor-default shadow-sm hover:shadow-xl"
                 style={styles.card}
               >
-                <h3
-                  className="text-2xl md:text-[1.75rem] font-[Instrument_Serif] mb-4"
-                  style={styles.title}
-                >
-                  {service.title}
-                </h3>
-                <p
-                  className="text-base md:text-lg leading-relaxed"
-                  style={styles.description}
-                >
-                  {service.description}
-                </p>
+                {/* Card background image */}
+                {service.backgroundImage && (
+                  <div
+                    className={`absolute right-0 top-0 bottom-0 w-1/2 pointer-events-none ${hasLightBackground ? 'opacity-35' : 'opacity-15'}`}
+                    style={{
+                      backgroundImage: `url(${service.backgroundImage})`,
+                      backgroundSize: 'cover',
+                      backgroundPosition: 'center',
+                      maskImage: 'linear-gradient(to right, transparent, black 30%)',
+                      WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%)',
+                    }}
+                  />
+                )}
+                <div className="relative z-10">
+                  <h3
+                    className="text-[1.75rem] md:text-[2rem] font-[Instrument_Serif] mb-4"
+                    style={styles.title}
+                  >
+                    {service.title}
+                  </h3>
+                  <p
+                    className="text-base md:text-lg leading-relaxed"
+                    style={styles.description}
+                  >
+                    {service.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
