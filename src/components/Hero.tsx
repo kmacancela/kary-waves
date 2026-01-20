@@ -75,8 +75,8 @@ const Hero = () => {
       {/* Scroll Indicator */}
       <div className="relative z-10 pb-8">
         <div className="container mx-auto px-6 md:px-8 flex justify-center">
-          <a href="#about" className="flex flex-col items-center gap-3 text-white hover:opacity-70 transition-opacity animate-fade-up delay-600 group drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
-            <span className="text-sm uppercase tracking-[0.2em] font-semibold">Discover Our Story</span>
+          <a href="#services" className="flex flex-col items-center gap-3 text-white hover:opacity-70 transition-opacity animate-fade-up delay-600 group drop-shadow-[0_2px_4px_rgba(0,0,0,0.5)]">
+            <span className="text-sm uppercase tracking-[0.2em] font-semibold">Discover Our Services</span>
             <svg className="w-5 h-5 animate-bounce" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
             </svg>

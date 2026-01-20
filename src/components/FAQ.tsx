@@ -132,17 +132,17 @@ const FAQ = () => {
     <section
       id="faq"
       ref={sectionRef}
-      className={`section-lg !pb-12 md:!pb-16 scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
+      className={`section-lg !pt-10 md:!pt-12 !pb-10 md:!pb-12 scroll-mt-16 md:scroll-mt-10 transition-colors duration-300 ${
         isDark ? 'bg-[--color-espresso]' : 'bg-[--color-cream]'
       }`}
     >
       <div className="container mx-auto px-6 md:px-8">
         {/* Header */}
         <div className={`reveal max-w-2xl mb-12 ${hasRevealed ? 'visible' : ''}`}>
-          <div className="flex items-center gap-3 mb-6">
+          {/* <div className="flex items-center gap-3 mb-6">
             <div className="line-accent" />
             <span className="eyebrow">How We Work</span>
-          </div>
+          </div> */}
           <h2 className={`display-lg mb-4 ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}>
             Simple. <em className="italic text-[--color-terracotta]">Transparent.</em>
           </h2>

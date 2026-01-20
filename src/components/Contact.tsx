@@ -54,17 +54,17 @@ const Contact = () => {
   }, [])
 
   return (
-    <section id="contact" ref={sectionRef} className={`scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
+    <section id="contact" ref={sectionRef} className={`scroll-mt-16 md:scroll-mt-10 transition-colors duration-300 ${
       isDark ? 'bg-[--color-espresso-light]' : 'bg-[--color-cream-dark]'
     }`}>
       {/* Header */}
-      <div className="section relative">
+      <div className="section !pt-10 md:!pt-12 relative">
         <div className="container mx-auto px-6 md:px-8">
           <div className={`reveal ${isVisible ? 'visible' : ''} max-w-3xl`}>
-            <div className="flex items-center gap-3 mb-6">
+            {/* <div className="flex items-center gap-3 mb-6">
               <div className="line-accent" />
               <span className="eyebrow">Let's Work Together</span>
-            </div>
+            </div> */}
             <h2 className={`display-lg mb-4 ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}>
               Ready to <em className="italic text-[--color-terracotta]">create?</em>
             </h2>

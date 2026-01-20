@@ -1,4 +1,4 @@
-import { useRef, useState, useMemo } from 'react'
+import { useRef, useState, useMemo, useEffect, useCallback } from 'react'
 import { useTheme } from '../context/ThemeContext'
 
 const imageData = [
@@ -68,9 +68,32 @@ const Lookbook = () => {
   const touchStartY = useRef<number>(0)
   const { isDark } = useTheme()
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
 
   // Shuffle images once on initial render
   const images = useMemo(() => shuffleArray(imageData), [])
+
+  const updateScrollState = useCallback(() => {
+    if (scrollRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
+      setCanScrollLeft(scrollLeft > 0)
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1)
+    }
+  }, [])
+
+  useEffect(() => {
+    const scrollElement = scrollRef.current
+    if (scrollElement) {
+      updateScrollState()
+      scrollElement.addEventListener('scroll', updateScrollState)
+      window.addEventListener('resize', updateScrollState)
+      return () => {
+        scrollElement.removeEventListener('scroll', updateScrollState)
+        window.removeEventListener('resize', updateScrollState)
+      }
+    }
+  }, [updateScrollState])
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -117,7 +140,7 @@ const Lookbook = () => {
 
   return (
     <>
-      <section id="lookbook" className={`section-lg overflow-hidden scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
+      <section id="lookbook" className={`section-lg !pt-10 md:!pt-12 !pb-10 md:!pb-12 overflow-hidden scroll-mt-16 md:scroll-mt-10 transition-colors duration-300 ${
         isDark ? 'bg-[--color-cream-dark]' : 'bg-[--color-espresso]'
       }`}>
         <div className="container mx-auto px-6 md:px-8">
@@ -128,7 +151,7 @@ const Lookbook = () => {
                 <div className="line-accent" />
                 <span className="eyebrow">Portfolio</span>
               </div> */}
-              <h2 className={`display-md mb-3 ${isDark ? 'text-[--color-espresso]' : 'text-[--color-cream]'}`}>
+              <h2 className={`display-lg mb-4 ${isDark ? 'text-[--color-espresso]' : 'text-[--color-cream]'}`}>
                 Our <em className="italic text-[--color-terracotta]">Lookbook</em>
               </h2>
               <p className={`text-base md:text-lg max-w-md ${isDark ? 'text-[--color-stone]' : 'text-[--color-cream]/80'}`}>
@@ -156,34 +179,38 @@ const Lookbook = () => {
         {/* Image Carousel with Side Arrows - breaks out of section padding */}
         <div className="relative -mx-6 md:-mx-8 lg:-mx-12">
           {/* Left Arrow */}
-          <button
-            onClick={() => scroll('left')}
-            className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
-              isDark
-                ? 'bg-[--color-espresso]/80 text-[--color-cream] hover:bg-[--color-espresso]'
-                : 'bg-[--color-cream]/80 text-[--color-espresso] hover:bg-[--color-cream]'
-            } shadow-lg backdrop-blur-sm`}
-            aria-label="Previous"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-            </svg>
-          </button>
+          {canScrollLeft && (
+            <button
+              onClick={() => scroll('left')}
+              className={`absolute left-2 md:left-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
+                isDark
+                  ? 'bg-[--color-espresso]/80 text-[--color-cream] hover:bg-[--color-espresso]'
+                  : 'bg-[--color-cream]/80 text-[--color-espresso] hover:bg-[--color-cream]'
+              } shadow-lg backdrop-blur-sm`}
+              aria-label="Previous"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+          )}
 
           {/* Right Arrow */}
-          <button
-            onClick={() => scroll('right')}
-            className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
-              isDark
-                ? 'bg-[--color-espresso]/80 text-[--color-cream] hover:bg-[--color-espresso]'
-                : 'bg-[--color-cream]/80 text-[--color-espresso] hover:bg-[--color-cream]'
-            } shadow-lg backdrop-blur-sm`}
-            aria-label="Next"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-            </svg>
-          </button>
+          {canScrollRight && (
+            <button
+              onClick={() => scroll('right')}
+              className={`absolute right-2 md:right-4 top-1/2 -translate-y-1/2 z-10 w-14 h-14 rounded-full flex items-center justify-center transition-all hover:scale-105 ${
+                isDark
+                  ? 'bg-[--color-espresso]/80 text-[--color-cream] hover:bg-[--color-espresso]'
+                  : 'bg-[--color-cream]/80 text-[--color-espresso] hover:bg-[--color-cream]'
+              } shadow-lg backdrop-blur-sm`}
+              aria-label="Next"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          )}
 
           {/* Scrollable Container - edge to edge */}
           <div

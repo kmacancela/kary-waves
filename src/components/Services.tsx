@@ -85,16 +85,16 @@ const Services = () => {
     <section
       id="services"
       ref={sectionRef}
-      className={`scroll-mt-20 md:scroll-mt-24 transition-colors duration-300 ${
+      className={`scroll-mt-16 md:scroll-mt-10 transition-colors duration-300 ${
         hasLightBackground ? 'bg-[--color-cream]' : 'bg-[--color-espresso]'
       }`}
     >
-      <div className="section-lg">
+      <div className="section-lg !pt-10 md:!pt-12 !pb-10 md:!pb-12">
         <div className="container mx-auto px-6 md:px-8">
           {/* Header */}
           <div className="reveal max-w-2xl mb-12">
             <h2 className={`display-lg mb-4 ${hasLightBackground ? 'text-[--color-espresso]' : 'text-[--color-cream]'}`}>
-              From concept <em className="italic text-[--color-terracotta]">to creation.</em>
+              From concept <em className="italic">to creation.</em>
             </h2>
             <p className={`text-lg md:text-xl ${hasLightBackground ? 'text-[--color-stone]' : 'text-[--color-cream]/85'}`}>
               Comprehensive manufacturing services tailored to your brand's unique needs—backed by two generations of expertise.
@@ -138,6 +138,13 @@ const Services = () => {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* CTA Button */}
+          <div className="reveal flex justify-center mt-12">
+            <a href="#contact" className={`btn ${hasLightBackground ? 'btn-light' : 'btn-dark'}`}>
+              Start Your Project
+            </a>
           </div>
 
         </div>

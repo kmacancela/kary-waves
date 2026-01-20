@@ -32,7 +32,7 @@ const About = () => {
     <section
       id="about"
       ref={sectionRef}
-      className={`section-lg transition-colors duration-300 scroll-mt-20 md:scroll-mt-24 ${
+      className={`section-lg !pt-8 md:!pt-16 !pb-10 md:!pb-12 transition-colors duration-300 scroll-mt-16 md:scroll-mt-10 ${
         isDark ? 'bg-[--color-espresso]' : 'bg-[--color-cream]'
       }`}
     >
