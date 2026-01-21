@@ -172,7 +172,7 @@ const Contact = () => {
   }, [])
 
   return (
-    <section id="contact" ref={sectionRef} className={`scroll-mt-16 md:scroll-mt-10 transition-colors duration-300 ${
+    <section id="contact" ref={sectionRef} className={`scroll-mt-16 md:scroll-mt-10 transition-colors duration-300 overflow-x-hidden ${
       isDark ? 'bg-[--color-espresso-light]' : 'bg-[--color-cream-dark]'
     }`}>
       {/* Header */}
@@ -192,12 +192,12 @@ const Contact = () => {
             </p>
           </div>
         </div>
-        {/* Decorative wavy line divider */}
-        <div className="absolute bottom-0 left-0 right-0 overflow-hidden">
+        {/* Decorative wavy line divider - desktop only */}
+        <div className="absolute bottom-0 left-0 right-0 overflow-hidden hidden md:block">
           <svg
             viewBox="0 0 1440 60"
-            preserveAspectRatio="none"
-            className="w-full h-12 md:h-16"
+            preserveAspectRatio="xMidYMid slice"
+            className="w-full h-16"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
@@ -230,13 +230,13 @@ const Contact = () => {
       </div>
 
       {/* Contact Grid */}
-      <div className="section-lg">
+      <div className="section-lg !pt-4 sm:!pt-16">
         <div className="container mx-auto px-6 md:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Left: Info + Map */}
-            <div>
+            <div className="flex flex-col-reverse sm:flex-col">
               {/* Contact Info */}
-              <div className={`reveal ${isVisible ? 'visible' : ''} grid sm:grid-cols-2 gap-10 mb-12`}>
+              <div className={`reveal ${isVisible ? 'visible' : ''} grid sm:grid-cols-2 gap-10 mt-16 sm:mt-0 sm:mb-12`}>
                 <div>
                   <div className="text-sm uppercase tracking-widest text-[--color-terracotta] mb-3 font-semibold">Visit Us</div>
                   <p className={`mb-3 text-lg ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}>
@@ -291,8 +291,9 @@ const Contact = () => {
                 </div>
               </div>
 
-              {/* Google Map */}
-              <div className={`reveal ${isVisible ? 'visible' : ''} aspect-[4/3] w-full`}>
+              {/* Google Map - full width on mobile */}
+              <div className="full-bleed-mobile">
+                <div className={`reveal ${isVisible ? 'visible' : ''} aspect-[4/3] w-full`}>
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2!2d-73.9917883!3d40.754022!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25fe13e706d9b%3A0x65964c9d62d74865!2sKary%20Waves%20Sample%20Room!5e0!3m2!1sen!2sus!4v1704825600000"
                   width="100%"
@@ -304,12 +305,14 @@ const Contact = () => {
                   title="Kary Waves Location"
                   className="transition-all duration-500"
                 />
+                </div>
               </div>
             </div>
 
             {/* Right: Form */}
             <div>
-              <div className={`reveal ${isVisible ? 'visible' : ''} px-8 pt-8 pb-6 md:px-10 md:pt-10 md:pb-8 rounded-2xl ${isDark ? 'bg-[#13110F]' : 'bg-[#B83D0C]'}`}>
+              <div className="full-bleed-mobile">
+              <div className={`reveal ${isVisible ? 'visible' : ''} px-6 pt-8 pb-6 sm:px-8 md:px-10 md:pt-10 md:pb-8 rounded-none sm:rounded-2xl ${isDark ? 'bg-[#13110F]' : 'bg-[#B83D0C]'}`}>
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
                   <label htmlFor="name" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
@@ -418,6 +421,7 @@ const Contact = () => {
                   </p>
                 )}
               </form>
+              </div>
               </div>
 
               {/* Email note */}

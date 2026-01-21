@@ -75,6 +75,20 @@ body.mobile-menu-open > #root {
   transform: scale(1.03) translateY(-4px);
 }
 
+/* Full-bleed element that breaks out of container padding on mobile */
+/* Accounts for section-lg padding (1.5rem) + container px-6 (1.5rem) = 3rem each side */
+.full-bleed-mobile {
+  width: calc(100% + 6rem);
+  margin-left: -3rem;
+}
+
+@media (min-width: 640px) {
+  .full-bleed-mobile {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
 @layer base {
   * {
     box-sizing: border-box;
@@ -543,6 +557,16 @@ input:focus, textarea:focus, select:focus {
 .horizontal-scroll > * {
   scroll-snap-align: start;
   flex-shrink: 0;
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
 
 /* Dark mode utility classes */
