@@ -3,6 +3,124 @@ import { useTheme } from '../context/ThemeContext'
 
 const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT
 
+const PhonePopover = ({ phoneNumber, isDark }: { phoneNumber: string; isDark: boolean }) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const formattedNumber = '(646) 675-1500'
+  const cleanNumber = phoneNumber.replace(/\D/g, '')
+
+  // Detect mobile/touch device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.matchMedia('(hover: none)').matches)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
+  // Close popover when clicking outside (mobile)
+  useEffect(() => {
+    if (!isOpen || !isMobile) return
+
+    const handleClickOutside = (e: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handleClickOutside)
+    document.addEventListener('touchstart', handleClickOutside)
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+      document.removeEventListener('touchstart', handleClickOutside)
+    }
+  }, [isOpen, isMobile])
+
+  const handleLinkClick = (e: React.MouseEvent) => {
+    // On mobile, first tap opens popover instead of calling
+    if (isMobile && !isOpen) {
+      e.preventDefault()
+      setIsOpen(true)
+    }
+    // On desktop or if popover is already open on mobile, let the tel: link work
+  }
+
+  const handleOptionClick = (e: React.MouseEvent) => {
+    // Allow the link to work, then close popover
+    setTimeout(() => setIsOpen(false), 100)
+    e.stopPropagation()
+  }
+
+  return (
+    <div
+      ref={containerRef}
+      className="relative inline-block"
+      onMouseEnter={() => !isMobile && setIsOpen(true)}
+      onMouseLeave={() => !isMobile && setIsOpen(false)}
+    >
+      <a
+        href={`tel:+1${cleanNumber}`}
+        onClick={handleLinkClick}
+        className={`text-lg hover:opacity-70 transition-opacity ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}
+      >
+        {formattedNumber}
+      </a>
+
+      {/* Popover */}
+      <div
+        className={`absolute left-0 top-full pt-2 z-50 transition-all duration-200 ${
+          isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-1 pointer-events-none'
+        }`}
+      >
+        <div
+          className={`flex rounded-lg overflow-hidden shadow-lg ${
+            isDark ? 'bg-[#1E1B19] border border-[#3D3835]' : 'bg-white border border-[#E5E2DE]'
+          }`}
+        >
+          <a
+            href={`tel:+1${cleanNumber}`}
+            onClick={handleOptionClick}
+            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
+              isDark
+                ? 'text-[--color-cream] hover:bg-[#2A2623]'
+                : 'text-[--color-espresso] hover:bg-[#F5F3F0]'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+            </svg>
+            Call
+          </a>
+          <div className={`w-px ${isDark ? 'bg-[#3D3835]' : 'bg-[#E5E2DE]'}`} />
+          <a
+            href={`sms:+1${cleanNumber}`}
+            onClick={handleOptionClick}
+            className={`flex items-center gap-2 px-4 py-2.5 text-sm font-medium transition-colors ${
+              isDark
+                ? 'text-[--color-cream] hover:bg-[#2A2623]'
+                : 'text-[--color-espresso] hover:bg-[#F5F3F0]'
+            }`}
+          >
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+            Text
+          </a>
+        </div>
+        {/* Arrow */}
+        <div
+          className={`absolute top-0.5 left-6 w-3 h-3 rotate-45 ${
+            isDark ? 'bg-[#1E1B19] border-l border-t border-[#3D3835]' : 'bg-white border-l border-t border-[#E5E2DE]'
+          }`}
+        />
+      </div>
+    </div>
+  )
+}
+
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null)
   const { isDark } = useTheme()
@@ -138,11 +256,9 @@ const Contact = () => {
 
                 <div>
                   <div className="text-sm uppercase tracking-widest text-[--color-terracotta] mb-3 font-semibold">Contact</div>
-                  <p className="mb-2">
-                    <a href="tel:+16466751500" className={`text-lg hover:opacity-70 transition-opacity ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}>
-                      (646) 675-1500
-                    </a>
-                  </p>
+                  <div className="mb-2">
+                    <PhonePopover phoneNumber="6466751500" isDark={isDark} />
+                  </div>
                   <p>
                     <a href="mailto:info@karywaves.com" className={`text-lg hover:opacity-70 transition-opacity ${isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'}`}>
                       info@karywaves.com
