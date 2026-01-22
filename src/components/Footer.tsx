@@ -138,7 +138,7 @@ const Footer = () => {
             <p>&copy; {currentYear} Kary Waves LLC • All rights reserved</p>
             <p className="flex items-center gap-3">
               <span className="text-[--color-gold]">★</span>
-              <span>Father & Daughter • Crafted in NYC • Est. 2004</span>
+              <span>The Garment District's Best Kept Secret</span>
               <span className="text-[--color-gold]">★</span>
             </p>
           </div>

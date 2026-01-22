@@ -14,7 +14,7 @@ const Header = () => {
       setHasScrolled(window.scrollY > 0)
 
       // Get the hero section element and check if we've scrolled past it
-      const heroSection = document.querySelector('section')
+      const heroSection = document.getElementById('hero')
       if (heroSection) {
         const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
         // Change header color when scrolled past the hero section (minus header height ~80px)
@@ -30,24 +30,14 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Toggle body class for mobile menu push effect with iOS scroll lock
+  // Toggle body class for mobile menu push effect
   useEffect(() => {
     if (isMobileMenuOpen) {
-      const scrollY = window.scrollY
       document.body.classList.add('mobile-menu-open')
-      document.body.style.top = `-${scrollY}px`
     } else {
-      const scrollY = document.body.style.top
       document.body.classList.remove('mobile-menu-open')
-      document.body.style.top = ''
-      if (scrollY) {
-        window.scrollTo(0, parseInt(scrollY || '0') * -1)
-      }
     }
-    return () => {
-      document.body.classList.remove('mobile-menu-open')
-      document.body.style.top = ''
-    }
+    return () => document.body.classList.remove('mobile-menu-open')
   }, [isMobileMenuOpen])
 
   const navLinks = [
@@ -121,7 +111,7 @@ const Header = () => {
           {/* Theme Toggle */}
           <button
             onClick={toggle}
-            className={`p-2 transition-colors ${getTextColor()}`}
+            className={`p-2 transition-colors ${getTextColor()} ${isMobileMenuOpen ? 'max-lg:hidden' : ''}`}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
           >
             {isDark ? (

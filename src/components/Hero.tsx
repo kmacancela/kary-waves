@@ -1,6 +1,6 @@
 const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] bg-[--color-espresso] overflow-hidden flex flex-col">
+    <section id="hero" className="relative min-h-[90vh] bg-[--color-espresso] overflow-hidden flex flex-col">
       {/* Background - Dramatic tailor workspace */}
       <div className="absolute inset-0">
         <img
