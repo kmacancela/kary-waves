@@ -1,14 +1,16 @@
+import { lazy, Suspense } from 'react'
 import { ThemeProvider } from './context/ThemeContext'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
 import Services from './components/Services'
-// import Installations from './components/Installations'
-import Lookbook from './components/Lookbook'
-import FAQ from './components/FAQ'
-import Contact from './components/Contact'
-import Marquee from './components/Marquee'
-import Footer from './components/Footer'
+
+// Lazy load below-fold components for better initial page load
+const Lookbook = lazy(() => import('./components/Lookbook'))
+const FAQ = lazy(() => import('./components/FAQ'))
+const Contact = lazy(() => import('./components/Contact'))
+const Marquee = lazy(() => import('./components/Marquee'))
+const Footer = lazy(() => import('./components/Footer'))
 
 function App() {
   return (
@@ -19,13 +21,16 @@ function App() {
           <Hero />
           <About />
           <Services />
-          {/* <Installations /> */}
-          <Lookbook />
-          <FAQ />
-          <Contact />
+          <Suspense fallback={null}>
+            <Lookbook />
+            <FAQ />
+            <Contact />
+          </Suspense>
         </main>
-        <Marquee />
-        <Footer />
+        <Suspense fallback={null}>
+          <Marquee />
+          <Footer />
+        </Suspense>
       </div>
     </ThemeProvider>
   )

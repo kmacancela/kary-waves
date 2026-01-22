@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { useTheme } from '../context/ThemeContext'
 
@@ -7,26 +7,35 @@ const Header = () => {
   const [hasScrolled, setHasScrolled] = useState(false) // For blur effect
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { isDark, toggle } = useTheme()
+  const ticking = useRef(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      // Blur appears as soon as user scrolls (scrollY > 0)
-      setHasScrolled(window.scrollY > 0)
+      // Throttle scroll handler to run at most once per frame (60fps)
+      if (ticking.current) return
+      ticking.current = true
 
-      // Get the hero section element and check if we've scrolled past it
-      const heroSection = document.getElementById('hero')
-      if (heroSection) {
-        const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
-        // Change header color when scrolled past the hero section (minus header height ~80px)
-        setIsScrolled(window.scrollY > heroBottom - 80)
-      } else {
-        // Fallback to 90vh if hero not found
-        setIsScrolled(window.scrollY > window.innerHeight * 0.9)
-      }
+      requestAnimationFrame(() => {
+        // Blur appears as soon as user scrolls (scrollY > 0)
+        setHasScrolled(window.scrollY > 0)
+
+        // Get the hero section element and check if we've scrolled past it
+        const heroSection = document.getElementById('hero')
+        if (heroSection) {
+          const heroBottom = heroSection.offsetTop + heroSection.offsetHeight
+          // Change header color when scrolled past the hero section (minus header height ~80px)
+          setIsScrolled(window.scrollY > heroBottom - 80)
+        } else {
+          // Fallback to 90vh if hero not found
+          setIsScrolled(window.scrollY > window.innerHeight * 0.9)
+        }
+
+        ticking.current = false
+      })
     }
     // Run once on mount to set initial state
     handleScroll()
-    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
