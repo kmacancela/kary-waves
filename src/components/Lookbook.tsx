@@ -1,4 +1,5 @@
 import { useRef, useState, useMemo, useEffect, useCallback } from 'react'
+import { createPortal } from 'react-dom'
 import { useTheme } from '../context/ThemeContext'
 
 const imageData = [
@@ -154,8 +155,8 @@ const Lookbook = () => {
               <h2 className={`display-lg mb-4 ${isDark ? 'text-[--color-espresso]' : 'text-[--color-cream]'}`}>
                 Our <em className="italic text-[--color-terracotta]">Lookbook</em>
               </h2>
-              <p className={`text-base md:text-lg max-w-md ${isDark ? 'text-[--color-stone]' : 'text-[--color-cream]/80'}`}>
-                A curated collection of garments crafted by Kary Waves.
+              <p className={`text-lg md:text-xl max-w-xl ${isDark ? 'text-[--color-stone]' : 'text-[--color-cream]/80'}`}>
+                Custom pieces and collaborations crafted in our Garment District studio for designers and brands.
               </p>
             </div>
 
@@ -251,10 +252,10 @@ const Lookbook = () => {
         </div>
       </section>
 
-      {/* Modal */}
-      {selectedImage && (
+      {/* Modal - rendered via portal to escape stacking context */}
+      {selectedImage && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 backdrop-blur-sm"
+          className="fixed inset-0 z-[70] flex items-center justify-center bg-black/90 backdrop-blur-sm"
           onClick={closeModal}
         >
           {/* Close button */}
@@ -283,7 +284,8 @@ const Lookbook = () => {
             {/* Transparent overlay to prevent direct image access */}
             <div className="absolute inset-0" />
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

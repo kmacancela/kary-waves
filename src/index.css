@@ -41,6 +41,15 @@ html::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Edge */
 }
 
+/* Background matches footer to fill safe area on mobile */
+html, body {
+  background-color: #E8E4DE;
+}
+
+html.dark, html.dark body {
+  background-color: #13110F;
+}
+
 /* Mobile menu push effect */
 body.mobile-menu-open {
   overflow: hidden;

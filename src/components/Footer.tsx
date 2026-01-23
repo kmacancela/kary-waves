@@ -25,7 +25,7 @@ const Footer = () => {
               isDark ? 'text-[--color-cream]/80' : 'text-[--color-espresso]/70'
             }`}>
               A <strong className={isDark ? 'text-[--color-gold-light]' : 'text-[--color-terracotta]'}>father & daughter</strong> garment manufacturing studio
-              in NYC's Garment District. Two generations crafting quality for brands that demand excellence.
+              in NYC's Garment District.
             </p>
             <a
               href="https://instagram.com/karywaves"

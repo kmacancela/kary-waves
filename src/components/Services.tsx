@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useTheme } from '../context/ThemeContext'
 
 const services = [
@@ -7,24 +8,18 @@ const services = [
     description: 'One-on-one guidance to bring your vision to life. We sit down with you to understand your brand, refine your concept, select the right materials, and map out a realistic production timeline. Whether you\'re launching your first collection or scaling an established line, we\'ll help you navigate every decision.',
     shortDescription: 'One-on-one guidance to refine your concept, select materials, and map out a realistic production timeline.',
     backgroundImage: '/images/consultation.png',
-    extendedDescription: `Our consultation process is designed to set your project up for success from day one. We begin by understanding your brand identity and creative vision. From there, we assist you through fabric selection so you understand the impact of weight, drape, and durability on your design.
-
-We'll review your tech packs or sketches together, offering feedback on construction feasibility and cost optimization. For new designers, we provide mentorship on industry standards, sizing conventions, and production timelines.
+    extendedDescription: `Our consultation process is designed to set your project up for success from day one. We begin by understanding your brand identity and creative vision. From there, we review, assist, and offer feedback.
 
 By the end of our consultation, you'll have a clear roadmap: materials sourced, patterns planned, and a realistic timeline to bring your collection to life. Consultations need to be conducted in-person at our NYC studio.`,
   },
   {
-    title: 'Pattern Development',
-    description: 'Expert pattern making for the perfect fit. Our skilled pattern makers translate your designs into precise, production-ready patterns that scale flawlessly across sizes. We account for fabric behavior, construction methods, and fit adjustments to ensure consistency from sample to final garment.',
+    title: 'Pattern Making',
+    description: 'Expert pattern making for the perfect fit. We translate your designs into precise, production-ready patterns that scale flawlessly across sizes. We account for fabric behavior, construction methods, and fit adjustments to ensure consistency from sample to final garment.',
     shortDescription: 'We translate your designs into precise, production-ready patterns that scale flawlessly across sizes.',
     backgroundImage: '/images/pattern-making.png',
-    extendedDescription: `Pattern making is where design meets engineering.
+    extendedDescription: `We start with your design—whether it's a detailed tech pack, a rough sketch, or even a reference garment you want to replicate. We draft the initial pattern, accounting for seam allowances, grain lines, notches, and construction sequence.
 
-We start with your design—whether it's a detailed tech pack, a rough sketch, or even a reference garment you want to replicate. We draft the initial pattern, accounting for seam allowances, grain lines, notches, and construction sequence.
-
-Once the base pattern is finished, we can grade it across your full size range, ensuring consistent fit and proportions. We also create detailed cut markers to minimize fabric waste during production, saving you money on materials.
-
-Every pattern can be digitized and archived, so future reorders or colorway additions are seamless.`,
+Once the base pattern is finished, we can grade it across your full size range. We also create detailed cut markers to minimize fabric waste during production, saving you money on materials. Every pattern can be digitized and archived, so future reorders or colorway additions are seamless.`,
   },
   {
     title: 'Sample Making',
@@ -46,16 +41,14 @@ After the first sample, we conduct a  fit session with you in-person. If needed,
 
 There is no minimum order quantity, making us an ideal partner for emerging designers, limited drops, and made-to-order brands. At the same time, we can handle runs of hundreds of pieces for established labels.
 
-Every production run follows a strict quality control process. We catch issues early so you receive only pieces that meet your standards. When your order is ready, you'll have a ready collection including care labels and packaging if needed.`,
+Every production run follows a strict quality control process. When your order is ready, you'll have a ready collection including care labels and packaging if needed.`,
   },
   {
     title: 'Alterations',
-    description: 'Precision alterations to perfect the fit. From minor adjustments like hemming and taking in seams to complete garment reworks, our experienced tailors handle it all. We work with individuals, designers, and brands who need expert alterations done right.',
-    shortDescription: 'From hemming to complete reworks, our experienced tailors handle alterations for individuals and brands alike.',
+    description: 'Precision alterations to perfect the fit. From minor adjustments like hemming and taking in seams to complete garment reworks, we handle it all. We work with individuals, designers, and brands who need expert alterations done right.',
+    shortDescription: 'From hemming to complete reworks, we handle alterations for individuals and brands alike.',
     backgroundImage: '/images/alteration.png',
     extendedDescription: `Whether you're a designer perfecting a one-off piece, a stylist prepping for a shoot, or an individual who needs their favorite jacket taken in, we bring the same expertise we apply to production to individual garments.
-
-Common alterations include hemming pants and skirts, taking in or letting out waists and side seams, shortening sleeves, adjusting shoulder widths, and tapering legs. We also handle replacing zippers, recutting linings, reconstructing collars, and reshaping entire garments.
 
 We offer rapid-turnaround alterations and even same-day service when deadlines are tight and time allows. Every alteration is performed by us in-person. We preserve the integrity of the original garment while achieving the perfect fit.`,
   },
@@ -64,9 +57,9 @@ We offer rapid-turnaround alterations and even same-day service when deadlines a
     description: 'Professional installation of eyelets, rivets, grommets, and snaps. We use industrial-grade equipment to ensure secure, clean, and consistent placement on any garment or accessory. Bring your pieces to us or include hardware installation as part of your production run.',
     shortDescription: 'Professional installation of eyelets, rivets, grommets, and snaps with industrial-grade equipment.',
     backgroundImage: '/images/rivet-machine.png',
-    extendedDescription: `We know hardware installation requires specialized equipment and expertise that most sewers don't have. Our machines apply precise, consistent pressure, so hardware sits flush and holds permanently. No crooked grommets, no loose snaps, no cracked rivets.
+    extendedDescription: `We know hardware installation requires specialized equipment and expertise that most sewers don't have. Our machines apply precise, consistent pressure, so hardware sits flush and holds permanently.
 
-We work with a wide range of hardware: metal and plastic snaps in various sizes, eyelets and grommets from 3mm to 40mm, jeans rivets, decorative studs, and specialty fasteners. If you have custom hardware, bring it in and we can likely install it.
+We work with a wide range of hardware: snaps, rivets, eyelets, grommets. If you have custom hardware, bring it in and we can likely install it.
 
 This service is available as a standalone or as a part of a production run. We also offer sourcing assistance if you need help finding the right hardware for your design.`,
   },
@@ -95,6 +88,9 @@ const Services = () => {
   const { isDark } = useTheme()
   const [selectedService, setSelectedService] = useState<number | null>(null)
   const [isClosing, setIsClosing] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const [dragY, setDragY] = useState(0)
+  const dragStartY = useRef<number | null>(null)
 
   // This section inverts the global theme for visual contrast
   const hasLightBackground = isDark
@@ -109,7 +105,36 @@ const Services = () => {
       setSelectedService(null)
       setIsClosing(false)
       isClosingRef.current = false
+      setDragY(0)
     }, 250) // Match animation duration
+  }
+
+  // Swipe down to close handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    dragStartY.current = e.touches[0].clientY
+    setIsDragging(true)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    if (dragStartY.current === null) return
+    const currentY = e.touches[0].clientY
+    const diff = currentY - dragStartY.current
+    // Only allow dragging down, not up
+    if (diff > 0) {
+      setDragY(diff)
+    }
+  }
+
+  const handleTouchEnd = () => {
+    const shouldClose = dragY > 100
+    // Reset drag state
+    setDragY(0)
+    setIsDragging(false)
+    dragStartY.current = null
+    // Close modal if dragged past threshold
+    if (shouldClose) {
+      closeModal()
+    }
   }
 
   // Cleanup timeout on unmount
@@ -204,7 +229,7 @@ const Services = () => {
               From concept <em className="italic">to creation.</em>
             </h2>
             <p className={`text-lg md:text-xl ${hasLightBackground ? 'text-[--color-stone]' : 'text-[--color-cream]/85'}`}>
-              Comprehensive manufacturing services tailored to your brand's unique needs—backed by two generations of expertise.
+              Experienced manufacturing services tailored to your brand's unique needs.
             </p>
           </div>
 
@@ -264,30 +289,53 @@ const Services = () => {
         </div>
       </div>
 
-      {/* Service Modal */}
-      {selectedService !== null && (
+      {/* Service Modal - rendered via portal to escape #root stacking context */}
+      {selectedService !== null && createPortal(
         <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6"
+          className="fixed inset-0 z-[60] sm:flex sm:items-center sm:justify-center sm:p-6"
           onClick={closeModal}
         >
           {/* Backdrop */}
           <div className={`absolute inset-0 bg-black/70 backdrop-blur-sm transition-opacity duration-[250ms] ${isClosing ? 'opacity-0' : 'opacity-100'}`} />
 
-          {/* Modal Content - Bottom sheet on mobile, centered modal on desktop */}
+          {/* Modal Content - absolute bottom on mobile, centered on desktop */}
           <div
             role="dialog"
             aria-modal="true"
             aria-labelledby="service-modal-title"
-            className={`relative w-full sm:max-w-2xl max-h-[90vh] sm:max-h-[85vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-2xl ${
-              isClosing ? 'animate-slide-down' : 'animate-slide-up'
+            className={`absolute bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:max-w-2xl h-auto max-h-[100dvh] sm:max-h-[85vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-2xl ${
+              isDragging ? '' : (isClosing ? 'animate-slide-down' : 'animate-slide-up')
             } sm:animate-none ${
               isDark ? 'bg-[#1A1614]' : 'bg-[#FAF8F5]'
             }`}
+            style={{
+              paddingBottom: 'env(safe-area-inset-bottom, 0px)',
+              marginBottom: 'calc(-1 * env(safe-area-inset-bottom, 0px))',
+              transform: dragY > 0 ? `translateY(${dragY}px)` : undefined,
+              transition: isDragging ? 'none' : 'transform 0.2s ease-out',
+            }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Drag handle - mobile only */}
-            <div className="sm:hidden flex justify-center pt-3 pb-1">
-              <div className={`w-10 h-1 rounded-full ${isDark ? 'bg-white/30' : 'bg-black/20'}`} />
+            {/* Drag area - mobile only, includes handle and title for swipe down to close */}
+            <div
+              className="sm:hidden touch-none"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+            >
+              {/* Drag handle */}
+              <div className="flex justify-center pt-3 pb-1">
+                <div className={`w-10 h-1 rounded-full ${isDark ? 'bg-white/30' : 'bg-black/20'}`} />
+              </div>
+              {/* Title in drag area */}
+              <h3
+                id="service-modal-title-mobile"
+                className={`text-2xl font-[Instrument_Serif] mb-4 px-5 ${
+                  isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'
+                }`}
+              >
+                {services[selectedService].title}
+              </h3>
             </div>
 
             {/* Background image */}
@@ -320,10 +368,11 @@ const Services = () => {
             </button>
 
             {/* Content */}
-            <div className="relative z-10 p-5 sm:p-8 md:p-10">
+            <div className="relative z-10 px-5 pb-5 sm:p-8 md:p-10">
+              {/* Title - desktop only (mobile title is in drag area above) */}
               <h3
                 id="service-modal-title"
-                className={`text-2xl sm:text-4xl font-[Instrument_Serif] mb-5 sm:mb-6 ${
+                className={`hidden sm:block text-4xl font-[Instrument_Serif] mb-6 ${
                   isDark ? 'text-[--color-cream]' : 'text-[--color-espresso]'
                 }`}
               >
@@ -366,7 +415,8 @@ const Services = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </section>
   )
