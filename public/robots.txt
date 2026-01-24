@@ -1,0 +1,6 @@
+# Kary Waves LLC - robots.txt
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://karywaves.com/sitemap.xml

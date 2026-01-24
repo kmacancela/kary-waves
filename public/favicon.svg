@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Terracotta background with subtle rounded corners -->
+  <rect width="64" height="64" fill="#B83D0C" rx="8" ry="8"/>
+  
+  <!-- Letter K - width ~18px (8 to 26) -->
+  <g fill="none" stroke="#FAF8F5" stroke-width="4" stroke-linecap="round" stroke-dasharray="3,6">
+    <!-- K vertical stem -->
+    <path d="M8 18 L8 46"/>
+    <!-- K upper diagonal - full extension -->
+    <path d="M12 32 L26 18"/>
+    <!-- K lower diagonal - full extension -->
+    <path d="M12 32 L26 46"/>
+  </g>
+  
+  <!-- Letter W - width ~24px (32 to 56) -->
+  <g fill="none" stroke="#FAF8F5" stroke-width="4" stroke-linecap="round" stroke-dasharray="3,6">
+    <path d="M32 18 L36 46"/>
+    <path d="M36 46 L44 26"/>
+    <path d="M44 26 L52 46"/>
+    <path d="M52 46 L56 18"/>
+  </g>
+</svg>
