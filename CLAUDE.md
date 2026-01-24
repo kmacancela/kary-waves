@@ -92,6 +92,13 @@ npm run build    # Build for production
 npm run preview  # Preview production build
 ```
 
+## Coding Principles
+
+- **Simpler is better** - Choose straightforward solutions over complex ones
+- **Avoid over-engineering** - Don't add unnecessary abstractions, media queries, or special cases when a simple approach works
+- **Never use `!important`** - It's bad practice; find a cleaner solution
+- **Image sizing**: Prefer container width adjustments with `background-size: cover` over percentage-based background-size values (they cause jarring jumps at breakpoints)
+
 ## Style Guidelines
 
 - Use `hover:opacity-70` for subtle hover effects (avoid drastic color changes)

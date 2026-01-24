@@ -82,6 +82,7 @@ body.mobile-menu-open > #root {
 /* Service cards hover effect */
 .service-card {
   transform: scale(1) translateY(0);
+  position: relative;
 }
 
 .services-grid:hover .service-card {
@@ -91,6 +92,13 @@ body.mobile-menu-open > #root {
 .services-grid .service-card:hover {
   transform: scale(1.03) translateY(-4px);
 }
+
+
+/* Stitch border - pattern and mask for draw animation */
+.stitch-rect {
+  stroke-dasharray: 6 5;
+}
+
 
 /* Full-bleed element that breaks out of container padding on mobile */
 /* Accounts for section-lg padding (1.5rem) + container px-6 (1.5rem) = 3rem each side */

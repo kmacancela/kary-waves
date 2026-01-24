@@ -57,6 +57,8 @@ We offer rapid-turnaround alterations and even same-day service when deadlines a
     description: 'Professional installation of eyelets, rivets, grommets, and snaps. We use industrial-grade equipment to ensure secure, clean, and consistent placement on any garment or accessory. Bring your pieces to us or include hardware installation as part of your production run.',
     shortDescription: 'Professional installation of eyelets, rivets, grommets, and snaps with industrial-grade equipment.',
     backgroundImage: '/images/rivet-machine.png',
+    backgroundSize: 'w-1/4 sm:w-1/3',
+    modalBgSize: '35%',
     extendedDescription: `We know hardware installation requires specialized equipment and expertise that most sewers don't have. Our machines apply precise, consistent pressure, so hardware sits flush and holds permanently.
 
 We work with a wide range of hardware: snaps, rivets, eyelets, grommets. If you have custom hardware, bring it in and we can likely install it.
@@ -242,10 +244,30 @@ const Services = () => {
                 className="service-card reveal relative overflow-hidden px-6 py-8 sm:px-8 sm:py-10 md:py-14 rounded-2xl border transition-all duration-300 ease-out cursor-pointer shadow-sm hover:shadow-xl active:scale-[0.98] sm:hover:scale-[1.02] text-left"
                 style={styles.card}
               >
+                {/* Stitch border SVG - hand-sewn dashed effect */}
+                <svg
+                  className="pointer-events-none absolute"
+                  style={{
+                    inset: '6px',
+                    width: 'calc(100% - 12px)',
+                    height: 'calc(100% - 12px)',
+                  }}
+                  fill="none"
+                >
+                  <rect
+                    className={`stitch-rect ${hasLightBackground ? 'stroke-[#FAF8F5]/50' : 'stroke-[#1A1614]/50'}`}
+                    x="1"
+                    y="1"
+                    rx="12"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    style={{ width: 'calc(100% - 2px)', height: 'calc(100% - 2px)' }}
+                  />
+                </svg>
                 {/* Card background image */}
                 {service.backgroundImage && (
                   <div
-                    className={`absolute right-0 top-0 bottom-0 w-1/3 sm:w-1/2 pointer-events-none ${hasLightBackground ? 'opacity-35' : 'opacity-15'}`}
+                    className={`absolute right-0 top-0 bottom-0 ${service.backgroundSize || 'w-1/3 sm:w-1/2'} pointer-events-none ${hasLightBackground ? 'opacity-35' : 'opacity-15'}`}
                     style={{
                       backgroundImage: `url(${service.backgroundImage})`,
                       backgroundSize: 'cover',
@@ -344,8 +366,9 @@ const Services = () => {
                 className={`absolute inset-0 pointer-events-none ${isDark ? 'opacity-20' : 'opacity-10'}`}
                 style={{
                   backgroundImage: `url(${services[selectedService].backgroundImage})`,
-                  backgroundSize: 'cover',
-                  backgroundPosition: 'center',
+                  backgroundSize: services[selectedService].modalBgSize || '50%',
+                  backgroundPosition: 'right top',
+                  backgroundRepeat: 'no-repeat',
                   maskImage: 'linear-gradient(to bottom, black 0%, transparent 60%)',
                   WebkitMaskImage: 'linear-gradient(to bottom, black 0%, transparent 60%)',
                 }}
