@@ -65,8 +65,6 @@ const shuffleArray = <T,>(array: T[]): T[] => {
 
 const Lookbook = () => {
   const scrollRef = useRef<HTMLDivElement>(null)
-  const touchStartX = useRef<number>(0)
-  const touchStartY = useRef<number>(0)
   const { isDark } = useTheme()
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
@@ -78,8 +76,18 @@ const Lookbook = () => {
   const updateScrollState = useCallback(() => {
     if (scrollRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
-      setCanScrollLeft(scrollLeft > 0)
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1)
+      const maxScroll = scrollWidth - clientWidth
+
+      // Clamp scroll position to valid bounds
+      if (scrollLeft < 0) {
+        scrollRef.current.scrollLeft = 0
+      } else if (scrollLeft > maxScroll) {
+        scrollRef.current.scrollLeft = maxScroll
+      }
+
+      // Use threshold to account for mobile touch/momentum rounding
+      setCanScrollLeft(scrollLeft > 5)
+      setCanScrollRight(scrollLeft < maxScroll - 5)
     }
   }, [])
 
@@ -106,28 +114,6 @@ const Lookbook = () => {
     }
   }
 
-  // Touch handlers for swipe gestures
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX
-    touchStartY.current = e.touches[0].clientY
-  }
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const touchEndX = e.changedTouches[0].clientX
-    const touchEndY = e.changedTouches[0].clientY
-    const deltaX = touchStartX.current - touchEndX
-    const deltaY = Math.abs(touchStartY.current - touchEndY)
-
-    // Only trigger if horizontal swipe is more significant than vertical
-    // and exceeds threshold (50px)
-    if (Math.abs(deltaX) > 50 && Math.abs(deltaX) > deltaY) {
-      if (deltaX > 0) {
-        scroll('right')
-      } else {
-        scroll('left')
-      }
-    }
-  }
 
   const openModal = (image: { src: string; alt: string }) => {
     setSelectedImage(image)
@@ -213,12 +199,10 @@ const Lookbook = () => {
             </button>
           )}
 
-          {/* Scrollable Container - edge to edge */}
+          {/* Scrollable Container */}
           <div
             ref={scrollRef}
             className="horizontal-scroll gap-5 scroll-smooth"
-            onTouchStart={handleTouchStart}
-            onTouchEnd={handleTouchEnd}
           >
             {images.map((image, index) => (
               <div

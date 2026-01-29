@@ -596,10 +596,10 @@ input:focus, textarea:focus, select:focus {
 .horizontal-scroll {
   display: flex;
   overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: none;
   scrollbar-width: none;
 }
+
 
 .horizontal-scroll::-webkit-scrollbar {
   display: none;
