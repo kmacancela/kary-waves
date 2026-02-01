@@ -129,6 +129,13 @@ const Contact = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
+    if (!FORMSPREE_ENDPOINT) {
+      console.error('FORMSPREE_ENDPOINT is not configured')
+      setStatus('error')
+      return
+    }
+
     setStatus('submitting')
 
     const form = e.currentTarget
