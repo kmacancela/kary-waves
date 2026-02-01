@@ -143,6 +143,13 @@ const Contact = () => {
 
       if (response.ok) {
         setStatus('success')
+        // Track form submission in Google Analytics
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'form_submit', {
+            event_category: 'contact',
+            event_label: data.get('service') as string || 'unknown'
+          })
+        }
         form.reset()
       } else {
         setStatus('error')

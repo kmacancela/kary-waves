@@ -55,7 +55,7 @@ const faqs = [
   },
   {
     question: 'Do you work with clients outside of New York?',
-    answer: 'Yes, we work with brands nationwide. Samples and production can be shipped, and we communicate via video calls and email.',
+    answer: 'We currently serve clients in New York, with shipping available to other regions on a case-by-case basis.',
   },
   {
     question: 'How many sample rounds are included?',
