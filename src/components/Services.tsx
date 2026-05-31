@@ -598,9 +598,9 @@ const Services = () => {
                     <button
                       type="submit"
                       disabled={alterationFormStatus === 'submitting'}
-                      className={`px-6 py-3 text-sm font-medium tracking-wide rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${isDark ? 'bg-[#B83D0C] text-white hover:bg-[#D94F1A]' : 'bg-[#1A1614] text-white hover:bg-[#2D2926]'}`}
+                      className={`w-full sm:w-auto sm:min-w-44 px-7 py-4 text-sm font-medium tracking-wide rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${isDark ? 'bg-[#B83D0C] text-white hover:bg-[#D94F1A]' : 'bg-[#1A1614] text-white hover:bg-[#2D2926]'}`}
                     >
-                      {alterationFormStatus === 'submitting' ? 'Sending...' : 'Send alteration request'}
+                      {alterationFormStatus === 'submitting' ? 'Sending...' : 'Send Request'}
                     </button>
 
                     {alterationFormStatus === 'success' && (
