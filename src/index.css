@@ -99,6 +99,15 @@ body.mobile-menu-open > #root {
   stroke-dasharray: 6 5;
 }
 
+.date-input-accent::-webkit-calendar-picker-indicator {
+  filter: invert(25%) sepia(91%) saturate(2451%) hue-rotate(16deg) brightness(91%) contrast(96%);
+  opacity: 1;
+}
+
+.date-input-accent::-webkit-calendar-picker-indicator:hover {
+  opacity: 0.7;
+}
+
 
 /* Full-bleed element that breaks out of container padding on mobile */
 /* Accounts for section-lg padding (1.5rem) + container px-6 (1.5rem) = 3rem each side */

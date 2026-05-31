@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useTheme } from '../context/ThemeContext'
 
+const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT
+
 const services = [
   {
     title: 'Consultation',
@@ -92,6 +94,7 @@ const Services = () => {
   const [isClosing, setIsClosing] = useState(false)
   const [isDragging, setIsDragging] = useState(false)
   const [dragY, setDragY] = useState(0)
+  const [alterationFormStatus, setAlterationFormStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
   const dragStartY = useRef<number | null>(null)
 
   // This section inverts the global theme for visual contrast
@@ -108,7 +111,46 @@ const Services = () => {
       setIsClosing(false)
       isClosingRef.current = false
       setDragY(0)
+      setAlterationFormStatus('idle')
     }, 250) // Match animation duration
+  }
+
+  const handleAlterationSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!FORMSPREE_ENDPOINT) {
+      console.error('FORMSPREE_ENDPOINT is not configured')
+      setAlterationFormStatus('error')
+      return
+    }
+
+    setAlterationFormStatus('submitting')
+
+    const form = e.currentTarget
+    const data = new FormData(form)
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      })
+
+      if (response.ok) {
+        setAlterationFormStatus('success')
+        if (typeof window.gtag === 'function') {
+          window.gtag('event', 'form_submit', {
+            event_category: 'contact',
+            event_label: 'alterations_modal'
+          })
+        }
+        form.reset()
+      } else {
+        setAlterationFormStatus('error')
+      }
+    } catch {
+      setAlterationFormStatus('error')
+    }
   }
 
   // Swipe down to close handlers
@@ -182,7 +224,7 @@ const Services = () => {
           header.style.transition = 'none'
           header.style.paddingRight = ''
           // Force reflow to apply the non-transitioned change
-          header.offsetHeight
+          void header.offsetHeight
           header.style.transition = originalTransition
         }
 
@@ -325,7 +367,7 @@ const Services = () => {
             role="dialog"
             aria-modal="true"
             aria-labelledby="service-modal-title"
-            className={`absolute bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto sm:max-w-2xl h-auto max-h-[100dvh] sm:max-h-[85vh] overflow-y-auto rounded-t-2xl sm:rounded-2xl shadow-2xl ${
+            className={`absolute bottom-0 left-0 right-0 sm:relative sm:bottom-auto sm:left-auto sm:right-auto ${services[selectedService].title === 'Alterations' ? 'sm:max-w-3xl' : 'sm:max-w-2xl'} h-auto max-h-[100dvh] overflow-hidden rounded-t-2xl sm:rounded-2xl shadow-2xl ${
               isDragging ? '' : (isClosing ? 'animate-slide-down' : 'animate-slide-up')
             } sm:animate-none ${
               isDark ? 'bg-[#1A1614]' : 'bg-[#FAF8F5]'
@@ -391,7 +433,7 @@ const Services = () => {
             </button>
 
             {/* Content */}
-            <div className="relative z-10 px-5 pb-5 sm:p-8 md:p-10">
+            <div className={`relative z-10 px-5 pb-5 sm:p-8 ${services[selectedService].title === 'Alterations' ? 'md:p-8' : 'md:p-10'}`}>
               {/* Title - desktop only (mobile title is in drag area above) */}
               <h3
                 id="service-modal-title"
@@ -410,32 +452,199 @@ const Services = () => {
                 ))}
               </div>
 
-              {/* CTA */}
-              <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-current/10 flex flex-col sm:flex-row sm:items-center gap-3">
-                <a
-                  href="#contact"
-                  onClick={closeModal}
-                  className={`inline-flex items-center justify-center gap-2 font-medium transition-opacity hover:opacity-70 ${
-                    isDark ? 'text-[#D94F1A]' : 'text-[#B83D0C]'
-                  }`}
-                >
-                  Get started with {services[selectedService].title.toLowerCase()}
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-                {/* Close button - mobile only */}
-                <button
-                  onClick={closeModal}
-                  className={`sm:hidden w-full py-3 rounded-xl font-medium transition-colors ${
-                    isDark
-                      ? 'bg-white/10 text-white active:bg-white/20'
-                      : 'bg-black/10 text-[#1A1614] active:bg-black/20'
-                  }`}
-                >
-                  Close
-                </button>
-              </div>
+              {services[selectedService].title === 'Alterations' && (
+                <form onSubmit={handleAlterationSubmit} className="mt-5 sm:mt-6 space-y-3">
+                  <input type="hidden" name="service" value="alterations" />
+                  <input type="hidden" name="source" value="Alterations service modal" />
+
+                  <div>
+                    <p className={`text-base sm:text-lg leading-relaxed ${isDark ? 'text-[--color-cream]/85' : 'text-[--color-stone]'}`}>
+                      Share the garment, the change needed, and your timing. We'll follow up to confirm the next step.
+                    </p>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="modal-alteration-name" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                        Name <span className="text-[#B83D0C]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="modal-alteration-name"
+                        name="name"
+                        required
+                        className={`w-full px-4 py-3 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white border border-[#E8E4DF] text-[#1A1614] placeholder-[#8A847D]'}`}
+                        placeholder="Your name"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="modal-alteration-email" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                        Email <span className="text-[#B83D0C]">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        id="modal-alteration-email"
+                        name="email"
+                        required
+                        className={`w-full px-4 py-3 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white border border-[#E8E4DF] text-[#1A1614] placeholder-[#8A847D]'}`}
+                        placeholder="Your email"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="modal-alteration-phone" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                        Phone
+                      </label>
+                      <input
+                        type="tel"
+                        id="modal-alteration-phone"
+                        name="phone"
+                        className={`w-full px-4 py-3 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white border border-[#E8E4DF] text-[#1A1614] placeholder-[#8A847D]'}`}
+                        placeholder="Your phone number"
+                      />
+                    </div>
+
+                    <div>
+                      <label htmlFor="modal-garment-type" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                        Garment type <span className="text-[#B83D0C]">*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="modal-garment-type"
+                          name="garment_type"
+                          required
+                          className={`w-full pl-4 pr-12 py-3 rounded-xl text-base focus:outline-none transition-all appearance-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/70 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white border border-[#E8E4DF] text-[#5C5650]'}`}
+                        >
+                          <option value="">Select garment type</option>
+                          <option value="dress">Dress</option>
+                          <option value="pants">Pants</option>
+                          <option value="jacket">Jacket</option>
+                          <option value="shirt-blouse">Shirt or blouse</option>
+                          <option value="skirt">Skirt</option>
+                          <option value="denim">Denim</option>
+                          <option value="leather">Leather</option>
+                          <option value="formalwear">Formalwear</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <svg
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none w-4 h-4 ${isDark ? 'text-white/40' : 'text-[#8A847D]'}`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label htmlFor="modal-alteration-details" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                      What needs changing? <span className="text-[#B83D0C]">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="modal-alteration-details"
+                      name="alteration_details"
+                      required
+                      maxLength={150}
+                      className={`w-full px-4 py-3 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white border border-[#E8E4DF] text-[#1A1614] placeholder-[#8A847D]'}`}
+                      placeholder="Hem, take in waist, repair seam..."
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="modal-needed-by" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                        When do you need it by?
+                      </label>
+                      <input
+                        type="date"
+                        id="modal-needed-by"
+                        name="needed_by"
+                        className={`date-input-accent w-full px-4 py-3 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/70 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white border border-[#E8E4DF] text-[#1A1614]'}`}
+                      />
+                    </div>
+
+                    <fieldset>
+                      <legend className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-[#1A1614]/70'}`}>
+                        Rush service? <span className="text-[#B83D0C]">*</span>
+                      </legend>
+                      <div className="grid grid-cols-2 gap-3">
+                        {['No', 'Yes'].map((option) => (
+                          <label
+                            key={option}
+                            className={`flex items-center gap-3 px-4 py-2.5 rounded-xl border text-base ${isDark ? 'bg-[#1E1B19] border-[#3D3835] text-white/80' : 'bg-white border-[#E8E4DF] text-[#1A1614]'}`}
+                          >
+                            <input
+                              type="radio"
+                              name="rush_service"
+                              value={option.toLowerCase()}
+                              required
+                              defaultChecked={option === 'No'}
+                              className="accent-[#B83D0C]"
+                            />
+                            {option}
+                          </label>
+                        ))}
+                      </div>
+                    </fieldset>
+                  </div>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 pt-1">
+                    <button
+                      type="submit"
+                      disabled={alterationFormStatus === 'submitting'}
+                      className={`px-6 py-3 text-sm font-medium tracking-wide rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${isDark ? 'bg-[#B83D0C] text-white hover:bg-[#D94F1A]' : 'bg-[#1A1614] text-white hover:bg-[#2D2926]'}`}
+                    >
+                      {alterationFormStatus === 'submitting' ? 'Sending...' : 'Send alteration request'}
+                    </button>
+
+                    {alterationFormStatus === 'success' && (
+                      <p className="text-green-500 text-sm">
+                        Thank you! Your request has been sent.
+                      </p>
+                    )}
+
+                    {alterationFormStatus === 'error' && (
+                      <p className="text-red-500 text-sm">
+                        Something went wrong. Please try again or email us directly.
+                      </p>
+                    )}
+                  </div>
+                </form>
+              )}
+
+              {services[selectedService].title !== 'Alterations' && (
+                <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-current/10 flex flex-col sm:flex-row sm:items-center gap-3">
+                  <a
+                    href="#contact"
+                    onClick={closeModal}
+                    className={`inline-flex items-center justify-center gap-2 font-medium transition-opacity hover:opacity-70 ${
+                      isDark ? 'text-[#D94F1A]' : 'text-[#B83D0C]'
+                    }`}
+                  >
+                    Get started with {services[selectedService].title.toLowerCase()}
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </a>
+                  {/* Close button - mobile only */}
+                  <button
+                    onClick={closeModal}
+                    className={`sm:hidden w-full py-3 rounded-xl font-medium transition-colors ${
+                      isDark
+                        ? 'bg-white/10 text-white active:bg-white/20'
+                        : 'bg-black/10 text-[#1A1614] active:bg-black/20'
+                    }`}
+                  >
+                    Close
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>,

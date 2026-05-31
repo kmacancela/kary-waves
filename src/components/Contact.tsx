@@ -126,6 +126,7 @@ const Contact = () => {
   const { isDark } = useTheme()
   const [isVisible, setIsVisible] = useState(false)
   const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [selectedService, setSelectedService] = useState('')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -158,6 +159,7 @@ const Contact = () => {
           })
         }
         form.reset()
+        setSelectedService('')
       } else {
         setStatus('error')
       }
@@ -378,6 +380,8 @@ const Contact = () => {
                     id="service"
                     name="service"
                     required
+                    value={selectedService}
+                    onChange={(e) => setSelectedService(e.target.value)}
                     className={`w-full pl-4 pr-12 py-4 rounded-xl text-base focus:outline-none transition-all appearance-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#8A847D]'}`}
                   >
                     <option value="">Select a service</option>
@@ -385,6 +389,7 @@ const Contact = () => {
                     <option value="pattern">Pattern Development</option>
                     <option value="small-batch">Small Batch Production</option>
                     <option value="full-production">Full-Scale Production</option>
+                    <option value="alterations">Alterations</option>
                     <option value="installations">Hardware Installations</option>
                     <option value="consultation">Consultation</option>
                   </select>
@@ -399,25 +404,117 @@ const Contact = () => {
                   </div>
                 </div>
 
-                <div>
-                  <label htmlFor="message" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
-                    Message <span className={isDark ? 'text-[#B83D0C]' : 'text-white'}>*</span>
-                  </label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={4}
-                    required
-                    className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all resize-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
-                    placeholder="Tell us about your project..."
-                  />
-                </div>
+                {selectedService === 'alterations' && (
+                  <div className={`space-y-3 pt-2 ${isDark ? 'text-[#FAF8F5]' : 'text-white'}`}>
+                    <div>
+                      <label htmlFor="garment-type" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
+                        Garment type <span className={isDark ? 'text-[#B83D0C]' : 'text-white'}>*</span>
+                      </label>
+                      <div className="relative">
+                        <select
+                          id="garment-type"
+                          name="garment_type"
+                          required
+                          className={`w-full pl-4 pr-12 py-4 rounded-xl text-base focus:outline-none transition-all appearance-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#8A847D]'}`}
+                        >
+                          <option value="">Select garment type</option>
+                          <option value="dress">Dress</option>
+                          <option value="pants">Pants</option>
+                          <option value="jacket">Jacket</option>
+                          <option value="shirt-blouse">Shirt or blouse</option>
+                          <option value="skirt">Skirt</option>
+                          <option value="denim">Denim</option>
+                          <option value="leather">Leather</option>
+                          <option value="formalwear">Formalwear</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <svg
+                          className={`absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none w-4 h-4 ${isDark ? 'text-white/40' : 'text-[#8A847D]'}`}
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label htmlFor="alteration-details" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
+                        What needs changing? <span className={isDark ? 'text-[#B83D0C]' : 'text-white'}>*</span>
+                      </label>
+                      <input
+                        type="text"
+                        id="alteration-details"
+                        name="alteration_details"
+                        required
+                        maxLength={150}
+                        className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
+                        placeholder="Hem, take in waist, repair seam..."
+                      />
+                    </div>
+
+                    <div className="grid grid-cols-[minmax(0,1fr)_auto] gap-3 items-end">
+                      <div>
+                        <label htmlFor="needed-by" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
+                          When do you need it by?
+                        </label>
+                        <input
+                          type="date"
+                          id="needed-by"
+                          name="needed_by"
+                          className={`date-input-accent w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white/60 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614]'}`}
+                        />
+                      </div>
+
+                      <fieldset className="w-44 sm:w-48">
+                        <legend className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
+                          Rush service? <span className={isDark ? 'text-[#B83D0C]' : 'text-white'}>*</span>
+                        </legend>
+                        <div className="grid grid-cols-2 gap-2">
+                          {['No', 'Yes'].map((option) => (
+                            <label
+                              key={option}
+                              className={`flex h-[58px] items-center justify-center gap-2 rounded-xl border text-sm font-medium ${isDark ? 'bg-[#1E1B19] border-[#3D3835] text-white/80' : 'bg-white/95 border-white/50 text-[#1A1614]'}`}
+                            >
+                              <input
+                                type="radio"
+                                name="rush_service"
+                                value={option.toLowerCase()}
+                                required
+                                defaultChecked={option === 'No'}
+                                className="accent-[#B83D0C]"
+                              />
+                              {option}
+                            </label>
+                          ))}
+                        </div>
+                      </fieldset>
+                    </div>
+                  </div>
+                )}
+
+                {selectedService !== 'alterations' && (
+                  <div>
+                    <label htmlFor="message" className={`block text-[11px] uppercase tracking-widest mb-2 font-medium ${isDark ? 'text-[#FAF8F5]/70' : 'text-white/90'}`}>
+                      Message <span className={isDark ? 'text-[#B83D0C]' : 'text-white'}>*</span>
+                    </label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={4}
+                      required
+                      className={`w-full px-4 py-4 rounded-xl text-base focus:outline-none transition-all resize-none ${isDark ? 'bg-[#1E1B19] border border-[#3D3835] text-white placeholder-white/40 shadow-[inset_0_1px_2px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.03)]' : 'bg-white/95 border border-white/50 text-[#1A1614] placeholder-[#8A847D]'}`}
+                      placeholder="Tell us about your project..."
+                    />
+                  </div>
+                )}
 
                 <div className="flex justify-end">
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className={`px-6 py-3 text-sm font-medium tracking-wide rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${isDark ? 'bg-[#B83D0C] text-white hover:bg-[#D94F1A]' : 'bg-[#1A1614] text-white hover:bg-[#2D2926]'}`}
+                    className={`w-full sm:w-auto sm:min-w-44 px-7 py-4 text-sm font-medium tracking-wide rounded-xl transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${isDark ? 'bg-[#B83D0C] text-white hover:bg-[#D94F1A]' : 'bg-[#1A1614] text-white hover:bg-[#2D2926]'}`}
                   >
                     {status === 'submitting' ? 'Sending...' : 'Send Message'}
                   </button>
