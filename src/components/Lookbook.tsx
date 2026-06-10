@@ -36,10 +36,6 @@ const imageData = [
     alt: 'Green scarf styled as a head covering',
   },
   {
-    src: '/images/lookbook/clients/summer-accessory-look.jpg',
-    alt: 'Summer accessory editorial look',
-  },
-  {
     src: '/images/lookbook/lolita-bell-jeans.jpg',
     alt: 'Bell-bottom jeans',
   },
