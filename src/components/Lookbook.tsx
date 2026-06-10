@@ -40,8 +40,8 @@ const imageData = [
     alt: 'Bell-bottom jeans',
   },
   {
-    src: '/images/lookbook/clients/tailored-jacket-look.webp',
-    alt: 'Tailored black jacket look',
+    src: '/images/lookbook/clients/princess-set-editorial-look.jpg',
+    alt: 'Princess set editorial look',
   },
   {
     src: '/images/lookbook/editorial-fashion.jpg',
@@ -50,6 +50,10 @@ const imageData = [
   {
     src: '/images/lookbook/clients/quilted-liner.webp',
     alt: 'Quilted liner jacket',
+  },
+  {
+    src: '/images/lookbook/clients/lime-blazer-set-look.jpg',
+    alt: 'Lime blazer set look',
   },
   {
     src: '/images/lookbook/clients/studio-accessory-profile.jpg',
