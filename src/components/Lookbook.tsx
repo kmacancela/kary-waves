@@ -4,52 +4,92 @@ import { useTheme } from '../context/ThemeContext'
 
 const imageData = [
   {
-    src: '/images/lookbook/scarf.jpg',
-    alt: 'Elegant scarf design',
-  },
-  {
-    src: '/images/lookbook/fashion-shoot.webp',
-    alt: 'Fashion shoot look',
-  },
-  {
     src: '/images/lookbook/custom-garment.jpg',
     alt: 'Custom garment piece',
   },
   {
-    src: '/images/lookbook/celebrity-jacket.jpg',
-    alt: 'Celebrity jacket design',
-  },
-  {
-    src: '/images/lookbook/handcrafted-design.jpg',
-    alt: 'Handcrafted design',
-  },
-  {
-    src: '/images/lookbook/lolita-bell-jeans.jpg',
-    alt: 'Lolita bell jeans',
-  },
-  {
-    src: '/images/lookbook/editorial-fashion.jpg',
-    alt: 'Editorial fashion shot',
+    src: '/images/lookbook/clients/tennis-dress-editorial.webp',
+    alt: 'Pleated tennis dress editorial',
   },
   {
     src: '/images/lookbook/fashion-showcase.webp',
     alt: 'Fashion design showcase',
   },
   {
+    src: '/images/lookbook/celebrity-jacket.jpg',
+    alt: 'Celebrity jacket design',
+  },
+  {
+    src: '/images/lookbook/clients/black-lapel-studio-look.webp',
+    alt: 'Black lapel studio look',
+  },
+  {
+    src: '/images/lookbook/handcrafted-design.jpg',
+    alt: 'Handcrafted design',
+  },
+  {
+    src: '/images/lookbook/clients/green-scarf-profile.webp',
+    alt: 'Green scarf styled as a head covering',
+  },
+  {
+    src: '/images/lookbook/lolita-bell-jeans.jpg',
+    alt: 'Bell-bottom jeans',
+  },
+  {
+    src: '/images/lookbook/clients/tailored-jacket-look.webp',
+    alt: 'Tailored black jacket look',
+  },
+  {
+    src: '/images/lookbook/editorial-fashion.jpg',
+    alt: 'Editorial fashion shot',
+  },
+  {
+    src: '/images/lookbook/clients/quilted-liner.webp',
+    alt: 'Quilted liner jacket',
+  },
+  {
     src: '/images/lookbook/design-in-progress.png',
     alt: 'Design in progress',
   },
   {
-    src: '/images/lookbook/lolita-jeans.jpg',
-    alt: 'Lolita jeans design',
+    src: '/images/lookbook/clients/green-court-dress.webp',
+    alt: 'Green court dress',
+  },
+  {
+    src: '/images/lookbook/clients/white-zip-detail.webp',
+    alt: 'White zip collar detail',
+  },
+  {
+    src: '/images/lookbook/clients/navy-skirt-detail.webp',
+    alt: 'Navy skirt construction detail',
   },
   {
     src: '/images/lookbook/professional-photoshoot.jpg',
     alt: 'Professional photoshoot',
   },
   {
+    src: '/images/lookbook/scarf.jpg',
+    alt: 'Elegant scarf design',
+  },
+  {
+    src: '/images/lookbook/clients/black-editorial-look.webp',
+    alt: 'Black high-neck editorial look',
+  },
+  {
+    src: '/images/lookbook/lolita-jeans.jpg',
+    alt: 'Custom jeans design',
+  },
+  {
+    src: '/images/lookbook/clients/black-jacket-studio-look.webp',
+    alt: 'Black jacket studio look',
+  },
+  {
     src: '/images/lookbook/tailored-piece.jpg',
     alt: 'Tailored piece',
+  },
+  {
+    src: '/images/lookbook/fashion-shoot.webp',
+    alt: 'Fashion shoot look',
   },
 ]
 
