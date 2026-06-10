@@ -68,6 +68,10 @@ const imageData = [
     alt: 'Green court dress',
   },
   {
+    src: '/images/lookbook/clients/pleated-court-dress-look.jpg',
+    alt: 'Pleated court dress look',
+  },
+  {
     src: '/images/lookbook/clients/white-zip-detail.webp',
     alt: 'White zip collar detail',
   },
@@ -82,6 +86,10 @@ const imageData = [
   {
     src: '/images/lookbook/professional-photoshoot.jpg',
     alt: 'Professional photoshoot',
+  },
+  {
+    src: '/images/lookbook/clients/white-court-dress-look.jpg',
+    alt: 'White court dress look',
   },
   {
     src: '/images/lookbook/scarf.jpg',
