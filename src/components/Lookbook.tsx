@@ -80,7 +80,7 @@ const imageData = [
     alt: 'Holiday studio look',
   },
   {
-    src: '/images/lookbook/clients/navy-skirt-detail.webp',
+    src: '/images/lookbook/clients/navy-court-skirt-detail.jpg',
     alt: 'Navy skirt construction detail',
   },
   {
