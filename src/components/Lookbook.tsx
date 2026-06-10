@@ -104,6 +104,10 @@ const imageData = [
     alt: 'Editorial accessory portrait',
   },
   {
+    src: '/images/lookbook/clients/pearl-accent-editorial-look.jpg',
+    alt: 'Pearl accent editorial look',
+  },
+  {
     src: '/images/lookbook/lolita-jeans.jpg',
     alt: 'Custom jeans design',
   },
