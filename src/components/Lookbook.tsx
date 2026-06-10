@@ -92,6 +92,10 @@ const imageData = [
     alt: 'White court dress look',
   },
   {
+    src: '/images/lookbook/clients/white-tennis-dress-detail.jpg',
+    alt: 'White tennis dress detail',
+  },
+  {
     src: '/images/lookbook/scarf.jpg',
     alt: 'Elegant scarf design',
   },
