@@ -8,11 +8,11 @@ const imageData = [
     alt: 'Custom garment piece',
   },
   {
-    src: '/images/lookbook/clients/tennis-dress-editorial.webp',
+    src: '/images/lookbook/tennis-dress-editorial.webp',
     alt: 'Pleated tennis dress editorial',
   },
   {
-    src: '/images/lookbook/clients/poolside-summer-look.jpg',
+    src: '/images/lookbook/poolside-summer-look.jpg',
     alt: 'Poolside summer accessory look',
   },
   {
@@ -24,7 +24,7 @@ const imageData = [
     alt: 'Celebrity jacket design',
   },
   {
-    src: '/images/lookbook/clients/black-lapel-studio-look.webp',
+    src: '/images/lookbook/black-lapel-studio-look.webp',
     alt: 'Black lapel studio look',
   },
   {
@@ -32,15 +32,11 @@ const imageData = [
     alt: 'Handcrafted design',
   },
   {
-    src: '/images/lookbook/clients/green-scarf-profile.webp',
+    src: '/images/lookbook/green-scarf-profile.webp',
     alt: 'Green scarf styled as a head covering',
   },
   {
-    src: '/images/lookbook/lolita-bell-jeans.jpg',
-    alt: 'Bell-bottom jeans',
-  },
-  {
-    src: '/images/lookbook/clients/princess-set-editorial-look.jpg',
+    src: '/images/lookbook/princess-set-editorial-look.jpg',
     alt: 'Princess set editorial look',
   },
   {
@@ -48,39 +44,35 @@ const imageData = [
     alt: 'Editorial fashion shot',
   },
   {
-    src: '/images/lookbook/clients/quilted-liner.webp',
+    src: '/images/lookbook/quilted-liner.webp',
     alt: 'Quilted liner jacket',
   },
   {
-    src: '/images/lookbook/clients/lime-blazer-set-look.jpg',
+    src: '/images/lookbook/lime-blazer-set-look.jpg',
     alt: 'Lime blazer set look',
   },
   {
-    src: '/images/lookbook/clients/studio-accessory-profile.jpg',
+    src: '/images/lookbook/studio-accessory-profile.jpg',
     alt: 'Studio accessory profile',
   },
   {
-    src: '/images/lookbook/design-in-progress.png',
-    alt: 'Design in progress',
-  },
-  {
-    src: '/images/lookbook/clients/green-court-dress.webp',
+    src: '/images/lookbook/green-court-dress.webp',
     alt: 'Green court dress',
   },
   {
-    src: '/images/lookbook/clients/pleated-court-dress-look.jpg',
+    src: '/images/lookbook/pleated-court-dress-look.jpg',
     alt: 'Pleated court dress look',
   },
   {
-    src: '/images/lookbook/clients/white-zip-detail.webp',
+    src: '/images/lookbook/white-zip-detail.webp',
     alt: 'White zip collar detail',
   },
   {
-    src: '/images/lookbook/clients/holiday-studio-look.jpg',
+    src: '/images/lookbook/holiday-studio-look.jpg',
     alt: 'Holiday studio look',
   },
   {
-    src: '/images/lookbook/clients/navy-court-skirt-detail.jpg',
+    src: '/images/lookbook/navy-court-skirt-detail.jpg',
     alt: 'Navy skirt construction detail',
   },
   {
@@ -88,27 +80,31 @@ const imageData = [
     alt: 'Professional photoshoot',
   },
   {
-    src: '/images/lookbook/clients/white-court-dress-look.jpg',
+    src: '/images/lookbook/white-court-dress-look.jpg',
     alt: 'White court dress look',
   },
   {
-    src: '/images/lookbook/clients/white-tennis-dress-detail.jpg',
+    src: '/images/lookbook/white-tennis-dress-detail.jpg',
     alt: 'White tennis dress detail',
+  },
+  {
+    src: '/images/lookbook/grommet-bell-pants-detail.png',
+    alt: 'Grommet bell pants detail',
   },
   {
     src: '/images/lookbook/scarf.jpg',
     alt: 'Elegant scarf design',
   },
   {
-    src: '/images/lookbook/clients/black-editorial-look.webp',
+    src: '/images/lookbook/black-editorial-look.webp',
     alt: 'Black high-neck editorial look',
   },
   {
-    src: '/images/lookbook/clients/editorial-accessory-portrait.jpg',
+    src: '/images/lookbook/editorial-accessory-portrait.jpg',
     alt: 'Editorial accessory portrait',
   },
   {
-    src: '/images/lookbook/clients/pearl-accent-editorial-look.jpg',
+    src: '/images/lookbook/pearl-accent-editorial-look.jpg',
     alt: 'Pearl accent editorial look',
   },
   {
@@ -116,7 +112,7 @@ const imageData = [
     alt: 'Custom jeans design',
   },
   {
-    src: '/images/lookbook/clients/black-jacket-studio-look.webp',
+    src: '/images/lookbook/black-jacket-studio-look.webp',
     alt: 'Black jacket studio look',
   },
   {
