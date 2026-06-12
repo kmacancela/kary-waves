@@ -56,10 +56,6 @@ const imageData = [
     alt: 'Studio accessory profile',
   },
   {
-    src: '/images/lookbook/green-court-dress.webp',
-    alt: 'Green court dress',
-  },
-  {
     src: '/images/lookbook/pleated-court-dress-look.jpg',
     alt: 'Pleated court dress look',
   },
@@ -90,10 +86,6 @@ const imageData = [
   {
     src: '/images/lookbook/grommet-bell-pants-detail.png',
     alt: 'Grommet bell pants detail',
-  },
-  {
-    src: '/images/lookbook/scarf.jpg',
-    alt: 'Elegant scarf design',
   },
   {
     src: '/images/lookbook/black-editorial-look.webp',
