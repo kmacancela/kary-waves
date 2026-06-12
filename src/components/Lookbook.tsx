@@ -8,10 +8,6 @@ const imageData = [
     alt: 'Custom garment piece',
   },
   {
-    src: '/images/lookbook/tennis-dress-editorial.webp',
-    alt: 'Pleated tennis dress editorial',
-  },
-  {
     src: '/images/lookbook/poolside-summer-look.jpg',
     alt: 'Poolside summer accessory look',
   },
@@ -28,10 +24,6 @@ const imageData = [
     alt: 'Black lapel studio look',
   },
   {
-    src: '/images/lookbook/handcrafted-design.jpg',
-    alt: 'Handcrafted design',
-  },
-  {
     src: '/images/lookbook/green-scarf-profile.webp',
     alt: 'Green scarf styled as a head covering',
   },
@@ -44,23 +36,15 @@ const imageData = [
     alt: 'Editorial fashion shot',
   },
   {
-    src: '/images/lookbook/quilted-liner.webp',
-    alt: 'Quilted liner jacket',
-  },
-  {
     src: '/images/lookbook/lime-blazer-set-look.jpg',
     alt: 'Lime blazer set look',
-  },
-  {
-    src: '/images/lookbook/studio-accessory-profile.jpg',
-    alt: 'Studio accessory profile',
   },
   {
     src: '/images/lookbook/pleated-court-dress-look.jpg',
     alt: 'Pleated court dress look',
   },
   {
-    src: '/images/lookbook/white-zip-detail.webp',
+    src: '/images/lookbook/white-zip-detail.jpg',
     alt: 'White zip collar detail',
   },
   {
@@ -98,6 +82,10 @@ const imageData = [
   {
     src: '/images/lookbook/pearl-accent-editorial-look.jpg',
     alt: 'Pearl accent editorial look',
+  },
+  {
+    src: '/images/lookbook/tied-shirt-editorial-look.jpg',
+    alt: 'Tied shirt editorial look',
   },
   {
     src: '/images/lookbook/lolita-jeans.jpg',
