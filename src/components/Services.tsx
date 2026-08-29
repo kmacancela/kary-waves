@@ -15,6 +15,19 @@ const services = [
 By the end of our consultation, you'll have a clear roadmap: materials sourced, patterns planned, and a realistic timeline to bring your collection to life. Consultations need to be conducted in-person at our NYC studio.`,
   },
   {
+    title: 'Tech Pack Creation',
+    description: 'Turn your concept into a clear, production-ready blueprint. We organize the measurements, construction details, materials, trims, colorways, and placement notes your pattern maker, sample room, and production team need to execute your design accurately.',
+    shortDescription: 'We turn your concept into a clear, production-ready blueprint with the details needed to make it accurately.',
+    backgroundImage: '/images/tech-pack-creation.png',
+    backgroundSize: 'w-1/2',
+    cardBackgroundSize: 'auto 88%',
+    extendedDescription: `A well-built tech pack keeps everyone working from the same set of instructions. Starting with your sketches, references, or an existing garment, we document the design details needed to move confidently into sampling and production.
+
+Your tech pack can include technical flats, measurement specifications, construction notes, materials and trims, colorways, and artwork or label placement. We tailor the level of detail to your project so the final package is practical, easy to follow, and ready to share with your production partners.
+
+If your design changes during sampling, we can also help update the specifications so your tech pack stays aligned with the approved garment.`,
+  },
+  {
     title: 'Pattern Making',
     description: 'Expert pattern making for the perfect fit. We translate your designs into precise, production-ready patterns that scale flawlessly across sizes. We account for fabric behavior, construction methods, and fit adjustments to ensure consistency from sample to final garment.',
     shortDescription: 'We translate your designs into precise, production-ready patterns that scale flawlessly across sizes.',
@@ -66,6 +79,17 @@ We offer rapid-turnaround alterations and even same-day service when deadlines a
 We work with a wide range of hardware: snaps, rivets, eyelets, grommets. If you have custom hardware, bring it in and we can likely install it.
 
 This service is available as a standalone or as a part of a production run. We also offer sourcing assistance if you need help finding the right hardware for your design.`,
+  },
+  {
+    title: 'Rhinestone Application',
+    description: 'Add shine with precise rhinestone placement for garments, costumes, and accessories. From restrained accents to statement layouts, we apply each design with careful attention to spacing, alignment, material compatibility, and a clean final finish.',
+    shortDescription: 'Precise rhinestone placement for garments, costumes, and accessories, from subtle accents to statement designs.',
+    backgroundImage: '/images/rhinestone-application.png',
+    extendedDescription: `Rhinestone work can transform a garment, but the finish depends on thoughtful layout and consistent placement. We work from your artwork, reference, or concept to plan the scale, spacing, stone sizes, colors, and position of the design before application begins.
+
+We can create subtle accents, logos, repeating motifs, or more detailed statement layouts on suitable garments and accessories. When needed, we test the application method against the material first to help protect the fabric and achieve a durable, polished result.
+
+Rhinestone application is available as a standalone service or as part of a sample or production run. You can provide your preferred stones, or we can help identify options that suit your design.`,
   },
 ]
 
@@ -312,8 +336,9 @@ const Services = () => {
                     className={`absolute right-0 top-0 bottom-0 ${service.backgroundSize || 'w-1/3 sm:w-1/2'} pointer-events-none ${hasLightBackground ? 'opacity-35' : 'opacity-15'}`}
                     style={{
                       backgroundImage: `url(${service.backgroundImage})`,
-                      backgroundSize: 'cover',
+                      backgroundSize: service.cardBackgroundSize || 'cover',
                       backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
                       maskImage: 'linear-gradient(to right, transparent, black 30%)',
                       WebkitMaskImage: 'linear-gradient(to right, transparent, black 30%)',
                     }}
