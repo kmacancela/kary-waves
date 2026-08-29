@@ -7,8 +7,8 @@ const FORMSPREE_ENDPOINT = import.meta.env.VITE_FORMSPREE_ENDPOINT
 const services = [
   {
     title: 'Consultation',
-    description: 'One-on-one guidance to bring your vision to life. We sit down with you to understand your brand, refine your concept, select the right materials, and map out a realistic production timeline. Whether you\'re launching your first collection or scaling an established line, we\'ll help you navigate every decision.',
-    shortDescription: 'One-on-one guidance to refine your concept, select materials, and map out a realistic production timeline.',
+    description: 'One-on-one guidance to bring your vision to life. We sit down with you to understand your brand, refine your concept, and map out a realistic production timeline. Whether you\'re launching your first collection or scaling an established line, we\'ll help you navigate every decision.',
+    shortDescription: 'One-on-one guidance to refine your concept and map out a realistic production timeline.',
     backgroundImage: '/images/consultation.png',
     extendedDescription: `Our consultation process is designed to set your project up for success from day one. We begin by understanding your brand identity and creative vision. From there, we review, assist, and offer feedback.
 
